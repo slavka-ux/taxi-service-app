@@ -54,7 +54,7 @@
             overflow-x: hidden;
         }
         
-        /* ============ Анімований фон з хмарами ============ */
+        /* ============ Анімований фон ============ */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -62,115 +62,28 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
+            opacity: 0.05;
             pointer-events: none;
-        }
-        
-        .cloud-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
         }
         
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            background: var(--primary);
             border-radius: 50%;
-            filter: blur(60px);
-            animation: floatCloud 25s infinite ease-in-out;
+            animation: float 20s infinite ease-in-out;
         }
         
-        .cloud:nth-child(1) {
-            width: 400px;
-            height: 150px;
-            top: 5%;
-            left: -10%;
-            animation-delay: 0s;
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .cloud:nth-child(1) { width: 300px; height: 120px; top: 5%; left: -5%; animation-delay: 0s; }
+        .cloud:nth-child(2) { width: 250px; height: 100px; top: 25%; right: -3%; animation-delay: -7s; }
+        .cloud:nth-child(3) { width: 200px; height: 80px; bottom: 15%; left: 10%; animation-delay: -14s; }
+        .cloud:nth-child(4) { width: 180px; height: 70px; top: 60%; right: 20%; animation-delay: -3s; }
+        .cloud:nth-child(5) { width: 150px; height: 60px; bottom: 30%; right: -2%; animation-delay: -10s; }
         
-        .cloud:nth-child(2) {
-            width: 350px;
-            height: 130px;
-            top: 20%;
-            right: -5%;
-            animation-delay: -7s;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .cloud:nth-child(3) {
-            width: 300px;
-            height: 120px;
-            bottom: 15%;
-            left: 5%;
-            animation-delay: -14s;
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .cloud:nth-child(4) {
-            width: 250px;
-            height: 100px;
-            top: 55%;
-            right: 10%;
-            animation-delay: -3s;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .cloud:nth-child(5) {
-            width: 200px;
-            height: 80px;
-            bottom: 30%;
-            right: -2%;
-            animation-delay: -10s;
-            background: rgba(255, 255, 255, 0.18);
-        }
-        
-        .cloud:nth-child(6) {
-            width: 280px;
-            height: 110px;
-            top: 40%;
-            left: 30%;
-            animation-delay: -5s;
-            background: rgba(255, 255, 255, 0.12);
-        }
-        
-        .cloud:nth-child(7) {
-            width: 320px;
-            height: 140px;
-            bottom: 5%;
-            right: 25%;
-            animation-delay: -18s;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .cloud:nth-child(8) {
-            width: 180px;
-            height: 70px;
-            top: 10%;
-            left: 45%;
-            animation-delay: -12s;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        @keyframes floatCloud {
-            0%, 100% {
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            20% {
-                transform: translateY(-40px) translateX(60px) scale(1.05);
-            }
-            40% {
-                transform: translateY(20px) translateX(-30px) scale(0.95);
-            }
-            60% {
-                transform: translateY(-60px) translateX(80px) scale(1.1);
-            }
-            80% {
-                transform: translateY(30px) translateX(-50px) scale(0.9);
-            }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-30px) translateX(30px) rotate(2deg); }
+            50% { transform: translateY(-60px) translateX(-20px) rotate(-2deg); }
+            75% { transform: translateY(-30px) translateX(-50px) rotate(1deg); }
         }
         
         /* ============ Навігація ============ */
@@ -216,7 +129,6 @@
             display: flex;
             gap: 2rem;
             list-style: none;
-            align-items: center;
         }
         
         .navbar-links a {
@@ -246,21 +158,20 @@
             width: 100%;
         }
         
-        .btn-register-nav {
-            background: var(--accent);
+        .btn-nav {
+            background: var(--primary);
             color: var(--white);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
-            border: 2px solid var(--accent);
-            cursor: pointer;
+            border: 2px solid var(--primary);
         }
         
-        .btn-register-nav:hover {
+        .btn-nav:hover {
             background: transparent;
-            color: var(--accent);
+            color: var(--primary);
         }
         
         /* ============ Hero секція ============ */
@@ -572,143 +483,6 @@
             transform: translateY(-50%) rotate(180deg);
         }
         
-        /* ============ Модальне вікно реєстрації ============ */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-overlay.active {
-            display: flex;
-        }
-        
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        
-        .modal {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            max-width: 450px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideUp 0.4s ease;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: var(--transition);
-        }
-        
-        .modal-close:hover {
-            color: var(--dark);
-            transform: rotate(90deg);
-        }
-        
-        .modal h2 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .modal p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-        
-        .register-form .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .register-form .form-group input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid #E5E7EB;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        .register-form .form-group input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
-        }
-        
-        .register-form .form-group label {
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.9rem;
-        }
-        
-        .btn-register {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .btn-register:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-register-success {
-            background: var(--success);
-        }
-        
-        .btn-register-success:hover {
-            background: #388E3C;
-        }
-        
-        .form-error {
-            color: var(--danger);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-        
-        .form-error.show {
-            display: block;
-        }
-        
-        .form-success {
-            text-align: center;
-            padding: 2rem 0;
-        }
-        
-        .form-success .icon {
-            font-size: 4rem;
-            display: block;
-            margin-bottom: 1rem;
-        }
-        
         /* ============ Можливості ============ */
         .features {
             max-width: 1200px;
@@ -993,10 +767,6 @@
             .dropdown-list {
                 max-height: 200px;
             }
-            
-            .modal {
-                padding: 1.5rem;
-            }
         }
         
         /* ============ Мобільне меню ============ */
@@ -1029,18 +799,13 @@
     </style>
 </head>
 <body>
-    <!-- Анімований фон з хмарами -->
+    <!-- Анімований фон -->
     <div class="bg-animation">
-        <div class="cloud-container">
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-            <div class="cloud"></div>
-        </div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
     </div>
     
     <!-- Навігація -->
@@ -1057,8 +822,11 @@
                 <li><a href="#api">API</a></li>
                 <li><a href="#status">Статус</a></li>
                 <li><a href="https://github.com/your-username/skybook" target="_blank">GitHub</a></li>
-                <li><button class="btn-register-nav" onclick="openRegisterModal()">📝 Реєстрація</button></li>
             </ul>
+            
+            <a href="https://github.com/your-username/skybook" class="btn-nav" target="_blank">
+                ⭐ Star
+            </a>
         </div>
     </nav>
     
@@ -1152,66 +920,11 @@
                 </select>
             </div>
             
-            <!-- Клас обслуговування -->
-            <div class="form-group">
-                <label>💺 Клас обслуговування</label>
-                <select id="serviceClass">
-                    <option value="economy">Економ (Economy)</option>
-                    <option value="premium_economy">Преміум економ (Premium Economy)</option>
-                    <option value="business">Бізнес (Business)</option>
-                    <option value="first">Перший (First)</option>
-                </select>
-            </div>
-            
             <button type="submit" class="btn-search">
                 🔍 Знайти рейси
             </button>
         </form>
     </section>
-    
-    <!-- Модальне вікно реєстрації -->
-    <div class="modal-overlay" id="registerModal">
-        <div class="modal">
-            <button class="modal-close" onclick="closeRegisterModal()">✕</button>
-            <h2>📝 Реєстрація в SkyBook</h2>
-            <p>Створіть акаунт та отримайте доступ до всіх можливостей</p>
-            
-            <form class="register-form" id="registerForm" onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label>👤 Ім'я</label>
-                    <input type="text" id="regName" placeholder="Введіть ваше ім'я" required>
-                    <div class="form-error" id="nameError">Будь ласка, введіть ім'я</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>📧 Email</label>
-                    <input type="email" id="regEmail" placeholder="Введіть ваш email" required>
-                    <div class="form-error" id="emailError">Будь ласка, введіть коректний email</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>🔒 Пароль</label>
-                    <input type="password" id="regPassword" placeholder="Мінімум 6 символів" required minlength="6">
-                    <div class="form-error" id="passwordError">Пароль має бути не менше 6 символів</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>✅ Підтвердження паролю</label>
-                    <input type="password" id="regConfirmPassword" placeholder="Підтвердіть пароль" required>
-                    <div class="form-error" id="confirmError">Паролі не співпадають</div>
-                </div>
-                
-                <button type="submit" class="btn-register">Зареєструватися</button>
-            </form>
-            
-            <div class="form-success" id="registerSuccess" style="display: none;">
-                <span class="icon">✅</span>
-                <h3>Реєстрація успішна!</h3>
-                <p>Вітаємо! Ви успішно створили акаунт в SkyBook.</p>
-                <button class="btn-register btn-register-success" onclick="closeRegisterModal()" style="margin-top: 1rem;">Чудово!</button>
-            </div>
-        </div>
-    </div>
     
     <!-- Можливості -->
     <section class="features" id="features">
@@ -1535,94 +1248,14 @@
             });
         });
         
-        // ============ ФУНКЦІЇ РЕЄСТРАЦІЇ ============
-        
-        function openRegisterModal() {
-            document.getElementById('registerModal').classList.add('active');
-            document.getElementById('registerForm').style.display = 'block';
-            document.getElementById('registerSuccess').style.display = 'none';
-            // Скидаємо помилки
-            document.querySelectorAll('.form-error').forEach(el => el.classList.remove('show'));
-            document.getElementById('registerForm').reset();
-        }
-        
-        function closeRegisterModal() {
-            document.getElementById('registerModal').classList.remove('active');
-        }
-        
-        function handleRegister(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const confirm = document.getElementById('regConfirmPassword').value;
-            
-            let isValid = true;
-            
-            // Валідація імені
-            if (name.length < 2) {
-                document.getElementById('nameError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('nameError').classList.remove('show');
-            }
-            
-            // Валідація email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                document.getElementById('emailError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('emailError').classList.remove('show');
-            }
-            
-            // Валідація паролю
-            if (password.length < 6) {
-                document.getElementById('passwordError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('passwordError').classList.remove('show');
-            }
-            
-            // Валідація підтвердження
-            if (password !== confirm) {
-                document.getElementById('confirmError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('confirmError').classList.remove('show');
-            }
-            
-            if (!isValid) return;
-            
-            // Тут буде реальний запит до API
-            // fetch('/api/users/register', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ name, email, password })
-            // })
-            
-            // Показуємо успіх
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('registerSuccess').style.display = 'block';
-            
-            console.log('Реєстрація:', { name, email, password });
-        }
-        
-        // Закриття модального вікна при кліку на оверлей
-        document.getElementById('registerModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeRegisterModal();
-            }
-        });
-        
-        // ============ ІНШІ ФУНКЦІЇ ============
-        
-        // Ініціалізація
+        // ============ ІНІЦІАЛІЗАЦІЯ ============
         document.addEventListener('DOMContentLoaded', function() {
+            // Ініціалізація списків
             renderCityList('fromList');
             renderCityList('toList');
         });
+        
+        // ============ ІНШІ ФУНКЦІЇ ============
         
         // Мобільне меню
         function toggleMenu() {
@@ -1636,18 +1269,16 @@
             
             const fromInput = document.getElementById('fromInput');
             const toInput = document.getElementById('toInput');
-            const serviceClass = document.getElementById('serviceClass');
             
             const from = fromInput.dataset.name || fromInput.value;
             const to = toInput.dataset.name || toInput.value;
-            const classLabel = serviceClass.options[serviceClass.selectedIndex].text;
             
             if (!from || !to) {
                 alert('⚠️ Будь ласка, оберіть міста вильоту та прибуття');
                 return;
             }
             
-            alert(`🚀 Пошук рейсів:\n\n🛫 Звідки: ${from}\n🛬 Куди: ${to}\n💺 Клас: ${classLabel}\n\nЦе демо-версія. API знаходиться в розробці.`);
+            alert(`🚀 Пошук рейсів:\n\n🛫 Звідки: ${from}\n🛬 Куди: ${to}\n\nЦе демо-версія. API знаходиться в розробці.`);
         }
         
         // Анімація лічильників
