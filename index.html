@@ -30,29 +30,301 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
+            /* Небо */
+            background: linear-gradient(180deg, 
+                #4A90D9 0%, 
+                #63B4FF 20%, 
+                #87CEEB 40%, 
+                #B0E0FF 60%, 
+                #D4EFFF 80%, 
+                #E8F4FD 100%
+            );
+            position: relative;
+        }
+        
+        /* ========== ХМАРИ ========== */
+        .sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        /* Хмара 1 */
+        .cloud1 {
+            width: 200px;
+            height: 60px;
+            top: 8%;
+            left: -10%;
+            animation: moveCloud 35s linear infinite;
+            opacity: 0.9;
+        }
+        .cloud1::before {
+            width: 80px;
+            height: 80px;
+            top: -40px;
+            left: 30px;
+        }
+        .cloud1::after {
+            width: 100px;
+            height: 70px;
+            top: -30px;
+            left: 90px;
+        }
+        
+        /* Хмара 2 */
+        .cloud2 {
+            width: 250px;
+            height: 70px;
+            top: 20%;
+            right: -15%;
+            animation: moveCloud 40s linear infinite;
+            animation-delay: -10s;
+            opacity: 0.85;
+        }
+        .cloud2::before {
+            width: 90px;
+            height: 90px;
+            top: -45px;
+            left: 40px;
+        }
+        .cloud2::after {
+            width: 110px;
+            height: 80px;
+            top: -35px;
+            left: 110px;
+        }
+        
+        /* Хмара 3 */
+        .cloud3 {
+            width: 180px;
+            height: 55px;
+            top: 35%;
+            left: -8%;
+            animation: moveCloud 30s linear infinite;
+            animation-delay: -20s;
+            opacity: 0.8;
+        }
+        .cloud3::before {
+            width: 70px;
+            height: 70px;
+            top: -35px;
+            left: 25px;
+        }
+        .cloud3::after {
+            width: 90px;
+            height: 60px;
+            top: -25px;
+            left: 80px;
+        }
+        
+        /* Хмара 4 */
+        .cloud4 {
+            width: 220px;
+            height: 65px;
+            top: 50%;
+            right: -12%;
+            animation: moveCloud 38s linear infinite;
+            animation-delay: -15s;
+            opacity: 0.75;
+        }
+        .cloud4::before {
+            width: 85px;
+            height: 85px;
+            top: -40px;
+            left: 35px;
+        }
+        .cloud4::after {
+            width: 105px;
+            height: 75px;
+            top: -30px;
+            left: 100px;
+        }
+        
+        /* Хмара 5 */
+        .cloud5 {
+            width: 160px;
+            height: 50px;
+            top: 65%;
+            left: -6%;
+            animation: moveCloud 33s linear infinite;
+            animation-delay: -25s;
+            opacity: 0.7;
+        }
+        .cloud5::before {
+            width: 65px;
+            height: 65px;
+            top: -30px;
+            left: 20px;
+        }
+        .cloud5::after {
+            width: 80px;
+            height: 55px;
+            top: -20px;
+            left: 70px;
+        }
+        
+        /* Хмара 6 */
+        .cloud6 {
+            width: 240px;
+            height: 68px;
+            top: 75%;
+            right: -10%;
+            animation: moveCloud 42s linear infinite;
+            animation-delay: -5s;
+            opacity: 0.65;
+        }
+        .cloud6::before {
+            width: 95px;
+            height: 95px;
+            top: -45px;
+            left: 45px;
+        }
+        .cloud6::after {
+            width: 115px;
+            height: 82px;
+            top: -35px;
+            left: 115px;
+        }
+        
+        @keyframes moveCloud {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(calc(100vw + 400px));
+            }
+        }
+        
+        /* ========== ЛІТАК ========== */
+        .airplane {
+            position: fixed;
+            top: 15%;
+            left: -200px;
+            font-size: 60px;
+            z-index: 1;
+            pointer-events: none;
+            animation: flyAirplane 15s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+        
+        .airplane-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .trail-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            height: 3px;
+            border-radius: 50%;
+            animation: fadeTrail 15s ease-in-out infinite;
+        }
+        
+        @keyframes flyAirplane {
+            0% {
+                left: -200px;
+                top: 15%;
+                transform: rotate(-5deg);
+            }
+            20% {
+                left: 30%;
+                top: 10%;
+                transform: rotate(0deg);
+            }
+            40% {
+                left: 60%;
+                top: 18%;
+                transform: rotate(3deg);
+            }
+            60% {
+                left: 80%;
+                top: 8%;
+                transform: rotate(-2deg);
+            }
+            80% {
+                left: 100%;
+                top: 20%;
+                transform: rotate(5deg);
+            }
+            100% {
+                left: 120%;
+                top: 12%;
+                transform: rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeTrail {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* ========== КОНТЕНТ ========== */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
         
         .container {
             max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5);
         }
         
-        h1 {
+        .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .header-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
             color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--gray);
+            font-size: 1.1rem;
         }
         
         .search-form {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
@@ -61,6 +333,12 @@
         @media (max-width: 768px) {
             .search-form {
                 grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            .header h1 {
+                font-size: 2rem;
             }
         }
         
@@ -90,7 +368,7 @@
             width: 100%;
             padding: 0.9rem 2.5rem 0.9rem 1rem;
             border: 2px solid #E5E7EB;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1rem;
             outline: none;
             cursor: pointer;
@@ -110,18 +388,18 @@
         .dropdown-input:focus,
         .dropdown-input.active {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.15);
+            box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
         }
         
         .dropdown-arrow {
             position: absolute;
-            right: 12px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
             pointer-events: none;
             transition: var(--transition);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         
         .dropdown-input.active + .dropdown-arrow {
@@ -131,13 +409,13 @@
         
         .dropdown-menu {
             position: absolute;
-            top: calc(100% + 5px);
+            top: calc(100% + 8px);
             left: 0;
             right: 0;
             background: var(--white);
             border: 2px solid #E5E7EB;
-            border-radius: 8px;
-            box-shadow: var(--shadow-lg);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             z-index: 1000;
             display: none;
             overflow: hidden;
@@ -149,12 +427,12 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .dropdown-menu-header {
-            padding: 0.5rem;
+            padding: 0.6rem 1rem;
             border-bottom: 1px solid #f0f0f0;
             background: #FAFAFA;
             font-size: 0.8rem;
@@ -242,7 +520,6 @@
             margin-bottom: 0.5rem;
         }
         
-        /* Підсвічування тексту при пошуку */
         .highlight {
             background: #FFF9C4;
             padding: 0 2px;
@@ -251,74 +528,123 @@
         
         .btn-search {
             grid-column: 1 / -1;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--white);
             border: none;
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            letter-spacing: 0.5px;
         }
         
         .btn-search:hover {
-            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+        }
+        
+        .btn-search:active {
+            transform: translateY(0);
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .badge {
+            padding: 0.4rem 1rem;
+            background: #E3F2FD;
+            color: var(--primary-dark);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>✈️ SkyBook — Пошук авіаквитків</h1>
-        
-        <div class="search-form">
-            <!-- Поле "Звідки" -->
-            <div class="dropdown" id="dropdownFrom">
-                <label class="dropdown-label">🛫 Звідки</label>
-                <div class="dropdown-input-wrapper">
-                    <input 
-                        type="text" 
-                        class="dropdown-input" 
-                        placeholder="Оберіть місто вильоту..."
-                        autocomplete="off"
-                    >
-                    <span class="dropdown-arrow">▼</span>
-                </div>
-                <div class="dropdown-menu">
-                    <div class="dropdown-menu-header">
-                        🔍 Почніть вводити назву міста для пошуку
-                    </div>
-                    <div class="dropdown-options"></div>
-                </div>
-                <input type="hidden" class="dropdown-value">
+    <!-- НЕБО З ХМАРАМИ -->
+    <div class="sky">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="cloud cloud4"></div>
+        <div class="cloud cloud5"></div>
+        <div class="cloud cloud6"></div>
+    </div>
+    
+    <!-- ЛІТАК -->
+    <div class="airplane">✈️</div>
+    
+    <!-- КОНТЕНТ -->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="header">
+                <span class="header-icon">✈️</span>
+                <h1>SkyBook</h1>
+                <p>Сучасний сервіс бронювання авіаквитків</p>
             </div>
             
-            <!-- Поле "Куди" -->
-            <div class="dropdown" id="dropdownTo">
-                <label class="dropdown-label">🛬 Куди</label>
-                <div class="dropdown-input-wrapper">
-                    <input 
-                        type="text" 
-                        class="dropdown-input" 
-                        placeholder="Оберіть місто призначення..."
-                        autocomplete="off"
-                    >
-                    <span class="dropdown-arrow">▼</span>
-                </div>
-                <div class="dropdown-menu">
-                    <div class="dropdown-menu-header">
-                        🔍 Почніть вводити назву міста для пошуку
+            <div class="search-form">
+                <!-- Поле "Звідки" -->
+                <div class="dropdown" id="dropdownFrom">
+                    <label class="dropdown-label">🛫 Звідки</label>
+                    <div class="dropdown-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="dropdown-input" 
+                            placeholder="Оберіть місто вильоту..."
+                            autocomplete="off"
+                        >
+                        <span class="dropdown-arrow">▼</span>
                     </div>
-                    <div class="dropdown-options"></div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-header">
+                            🔍 Введіть назву міста для пошуку
+                        </div>
+                        <div class="dropdown-options"></div>
+                    </div>
+                    <input type="hidden" class="dropdown-value">
                 </div>
-                <input type="hidden" class="dropdown-value">
+                
+                <!-- Поле "Куди" -->
+                <div class="dropdown" id="dropdownTo">
+                    <label class="dropdown-label">🛬 Куди</label>
+                    <div class="dropdown-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="dropdown-input" 
+                            placeholder="Оберіть місто призначення..."
+                            autocomplete="off"
+                        >
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-header">
+                            🔍 Введіть назву міста для пошуку
+                        </div>
+                        <div class="dropdown-options"></div>
+                    </div>
+                    <input type="hidden" class="dropdown-value">
+                </div>
+                
+                <button class="btn-search" onclick="handleSearch()">
+                    🔍 Знайти рейси
+                </button>
             </div>
             
-            <button class="btn-search" onclick="handleSearch()">
-                🔍 Знайти рейси
-            </button>
+            <div class="badges">
+                <span class="badge">🐍 Python</span>
+                <span class="badge">⚡ Flask</span>
+                <span class="badge">🌍 50+ аеропортів</span>
+                <span class="badge">📱 Adaptive</span>
+            </div>
         </div>
     </div>
     
@@ -328,7 +654,7 @@
             // Україна
             { code: "KBP", city: "Київ", country: "Україна", airport: "Бориспіль" },
             { code: "IEV", city: "Київ", country: "Україна", airport: "Жуляни" },
-            { code: "LWO", city: "Львів", country: "Україна", airport: "Львів ім. Данила Галицького" },
+            { code: "LWO", city: "Львів", country: "Україна", airport: "Львів ім. Д. Галицького" },
             { code: "ODS", city: "Одеса", country: "Україна", airport: "Одеса" },
             { code: "HRK", city: "Харків", country: "Україна", airport: "Харків" },
             { code: "DNK", city: "Дніпро", country: "Україна", airport: "Дніпро" },
@@ -336,68 +662,46 @@
             { code: "UDJ", city: "Ужгород", country: "Україна", airport: "Ужгород" },
             { code: "CWC", city: "Чернівці", country: "Україна", airport: "Чернівці" },
             { code: "IFO", city: "Івано-Франківськ", country: "Україна", airport: "Івано-Франківськ" },
-            { code: "VIN", city: "Вінниця", country: "Україна", airport: "Вінниця" },
-            { code: "PLV", city: "Полтава", country: "Україна", airport: "Полтава" },
-            { code: "RWN", city: "Рівне", country: "Україна", airport: "Рівне" },
             
             // Європа
             { code: "WAW", city: "Варшава", country: "Польща", airport: "Шопен" },
             { code: "KRK", city: "Краків", country: "Польща", airport: "Краків" },
-            { code: "GDN", city: "Гданськ", country: "Польща", airport: "Гданськ" },
-            { code: "WRO", city: "Вроцлав", country: "Польща", airport: "Вроцлав" },
             { code: "LHR", city: "Лондон", country: "Велика Британія", airport: "Хітроу" },
             { code: "LGW", city: "Лондон", country: "Велика Британія", airport: "Гатвік" },
-            { code: "STN", city: "Лондон", country: "Велика Британія", airport: "Станстед" },
-            { code: "MAN", city: "Манчестер", country: "Велика Британія", airport: "Манчестер" },
             { code: "CDG", city: "Париж", country: "Франція", airport: "Шарль де Голль" },
-            { code: "ORY", city: "Париж", country: "Франція", airport: "Орлі" },
             { code: "NCE", city: "Ніцца", country: "Франція", airport: "Ніцца" },
-            { code: "LYS", city: "Ліон", country: "Франція", airport: "Ліон" },
             { code: "FRA", city: "Франкфурт", country: "Німеччина", airport: "Франкфурт" },
             { code: "MUC", city: "Мюнхен", country: "Німеччина", airport: "Мюнхен" },
-            { code: "BER", city: "Берлін", country: "Німеччина", airport: "Берлін-Бранденбург" },
-            { code: "HAM", city: "Гамбург", country: "Німеччина", airport: "Гамбург" },
-            { code: "DUS", city: "Дюссельдорф", country: "Німеччина", airport: "Дюссельдорф" },
+            { code: "BER", city: "Берлін", country: "Німеччина", airport: "Берлін" },
             { code: "FCO", city: "Рим", country: "Італія", airport: "Ф'юмічіно" },
             { code: "MXP", city: "Мілан", country: "Італія", airport: "Мальпенса" },
-            { code: "BGY", city: "Мілан", country: "Італія", airport: "Бергамо" },
             { code: "VCE", city: "Венеція", country: "Італія", airport: "Марко Поло" },
-            { code: "BCN", city: "Барселона", country: "Іспанія", airport: "Барселона Ель Прат" },
+            { code: "BCN", city: "Барселона", country: "Іспанія", airport: "Барселона" },
             { code: "MAD", city: "Мадрид", country: "Іспанія", airport: "Барахас" },
-            { code: "AGP", city: "Малага", country: "Іспанія", airport: "Малага" },
-            { code: "VLC", city: "Валенсія", country: "Іспанія", airport: "Валенсія" },
             { code: "AMS", city: "Амстердам", country: "Нідерланди", airport: "Схіпгол" },
             { code: "VIE", city: "Відень", country: "Австрія", airport: "Відень" },
             { code: "PRG", city: "Прага", country: "Чехія", airport: "Прага" },
             { code: "BUD", city: "Будапешт", country: "Угорщина", airport: "Будапешт" },
-            { code: "OTP", city: "Бухарест", country: "Румунія", airport: "Бухарест" },
             { code: "IST", city: "Стамбул", country: "Туреччина", airport: "Стамбул" },
             { code: "AYT", city: "Анталія", country: "Туреччина", airport: "Анталія" },
             { code: "ATH", city: "Афіни", country: "Греція", airport: "Афіни" },
             { code: "ZRH", city: "Цюрих", country: "Швейцарія", airport: "Цюрих" },
             { code: "ARN", city: "Стокгольм", country: "Швеція", airport: "Арланда" },
             { code: "CPH", city: "Копенгаген", country: "Данія", airport: "Копенгаген" },
-            { code: "OSL", city: "Осло", country: "Норвегія", airport: "Осло" },
-            { code: "HEL", city: "Гельсінкі", country: "Фінляндія", airport: "Гельсінкі" },
             
             // Азія
             { code: "DXB", city: "Дубай", country: "ОАЕ", airport: "Дубай" },
-            { code: "AUH", city: "Абу-Дабі", country: "ОАЕ", airport: "Абу-Дабі" },
             { code: "DOH", city: "Доха", country: "Катар", airport: "Доха" },
             { code: "TLV", city: "Тель-Авів", country: "Ізраїль", airport: "Бен-Гуріон" },
             { code: "BKK", city: "Бангкок", country: "Таїланд", airport: "Суварнабхумі" },
             { code: "NRT", city: "Токіо", country: "Японія", airport: "Наріта" },
-            { code: "HND", city: "Токіо", country: "Японія", airport: "Ханеда" },
-            { code: "ICN", city: "Сеул", country: "Південна Корея", airport: "Інчхон" },
             
             // Америка
             { code: "JFK", city: "Нью-Йорк", country: "США", airport: "Кеннеді" },
-            { code: "EWR", city: "Нью-Йорк", country: "США", airport: "Ньюарк" },
             { code: "LAX", city: "Лос-Анджелес", country: "США", airport: "Лос-Анджелес" },
             { code: "ORD", city: "Чикаго", country: "США", airport: "О'Хара" },
             { code: "MIA", city: "Маямі", country: "США", airport: "Маямі" },
             { code: "YYZ", city: "Торонто", country: "Канада", airport: "Торонто" },
-            { code: "YVR", city: "Ванкувер", country: "Канада", airport: "Ванкувер" },
         ];
         
         // ========== DROPDOWN КЛАС ==========
@@ -415,24 +719,20 @@
             }
             
             init() {
-                // Показати всі опції при фокусі/кліку
                 this.input.addEventListener('focus', () => this.showMenu());
                 this.input.addEventListener('click', () => this.showMenu());
                 
-                // Фільтрувати при вводі тексту
                 this.input.addEventListener('input', () => {
                     this.filterOptions(this.input.value);
                     this.showMenu();
                 });
                 
-                // Закриття меню при кліку поза компонентом
                 document.addEventListener('click', (e) => {
                     if (!this.container.contains(e.target)) {
                         this.hideMenu();
                     }
                 });
                 
-                // Початкове відображення всіх опцій
                 this.renderOptions(airports);
             }
             
@@ -457,7 +757,7 @@
                 this.hiddenInput.value = airport.code;
                 
                 this.hideMenu();
-                this.renderOptions(airports); // Оновити список
+                this.renderOptions(airports);
             }
             
             filterOptions(query) {
@@ -529,7 +829,6 @@
         const dropdownFrom = new SearchableDropdown('dropdownFrom');
         const dropdownTo = new SearchableDropdown('dropdownTo');
         
-        // Зберігаємо посилання на об'єкти в DOM для зручного доступу
         document.getElementById('dropdownFrom').dropdown = dropdownFrom;
         document.getElementById('dropdownTo').dropdown = dropdownTo;
         
@@ -555,7 +854,7 @@
                 return;
             }
             
-            alert(`✅ Пошук рейсів:\n🛫 ${dropdownFrom.getText()}\n🛬 ${dropdownTo.getText()}`);
+            alert(`✅ Пошук рейсів:\n🛫 ${dropdownFrom.getText()}\n🛬 ${dropdownTo.getText()}\n\n(Демо-версія — API в розробці)`);
         }
     </script>
 </body>
