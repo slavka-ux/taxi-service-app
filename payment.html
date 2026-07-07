@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата — SkyTicket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/payment.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/logo.svg">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="SkyTicket">
+                <span>SkyTicket</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="payment-section">
+        <div class="container">
+            <div class="payment-wrapper">
+                <div class="payment-summary">
+                    <h3>Замовлення</h3>
+                    <div class="summary-item">
+                        <span>Рейс:</span>
+                        <span>PS 123 • Київ → Лондон</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Пасажири:</span>
+                        <span>2 дорослі</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Місця:</span>
+                        <span>12A, 12B</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Багаж:</span>
+                        <span>20 кг × 2</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>До сплати:</span>
+                        <span id="totalPrice">850 $</span>
+                    </div>
+                </div>
+
+                <div class="payment-form">
+                    <h3>Спосіб оплати</h3>
+                    <div class="payment-methods">
+                        <button class="btn-payment active" data-method="card">💳 Картка</button>
+                        <button class="btn-payment" data-method="apple">🍎 Apple Pay</button>
+                        <button class="btn-payment" data-method="google">📱 Google Pay</button>
+                    </div>
+
+                    <form id="paymentForm">
+                        <div class="form-group">
+                            <label for="cardNumber">Номер картки</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Термін дії</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardHolder">Ім'я власника</label>
+                            <input type="text" id="cardHolder" placeholder="Ivan Petrov" required>
+                        </div>
+                        <button type="submit" class="btn btn-pay">Оплатити 850 $</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SkyTicket. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>

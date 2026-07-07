@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Посадковий талон — SkyTicket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/boarding-pass.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/logo.svg">
+</head>
+<body>
+    <section class="boarding-pass">
+        <div class="container">
+            <div class="boarding-card" id="boardingCard">
+                <div class="boarding-header">
+                    <img src="assets/images/logo.svg" alt="SkyTicket" class="boarding-logo">
+                    <span class="boarding-status">ПОСАДКОВИЙ ТАЛОН</span>
+                </div>
+
+                <div class="boarding-main">
+                    <div class="boarding-flight">
+                        <div class="flight-route">
+                            <span class="city">Київ (KBP)</span>
+                            <span class="arrow">✈ →</span>
+                            <span class="city">Лондон (LHR)</span>
+                        </div>
+                        <div class="flight-info">
+                            <span><strong>Рейс:</strong> PS 123</span>
+                            <span><strong>Дата:</strong> 15.06.2026</span>
+                            <span><strong>Час:</strong> 10:30</span>
+                        </div>
+                    </div>
+
+                    <div class="boarding-details">
+                        <div class="detail">
+                            <span>Пасажир</span>
+                            <strong>Іван Петров</strong>
+                        </div>
+                        <div class="detail">
+                            <span>Місце</span>
+                            <strong>12A</strong>
+                        </div>
+                        <div class="detail">
+                            <span>Вихід</span>
+                            <strong>B12</strong>
+                        </div>
+                        <div class="detail">
+                            <span>Термінал</span>
+                            <strong>2</strong>
+                        </div>
+                    </div>
+
+                    <div class="boarding-qr">
+                        <canvas id="qrCode"></canvas>
+                        <p>Відскануйте QR-код для посадки</p>
+                    </div>
+                </div>
+
+                <div class="boarding-footer">
+                    <button class="btn btn-primary" id="printBtn">🖨 Роздрукувати</button>
+                    <button class="btn btn-secondary" id="downloadBtn">⬇ Завантажити PDF</button>
+                    <a href="index.html" class="btn btn-outline">На головну</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script src="js/boarding-pass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</body>
+</html>

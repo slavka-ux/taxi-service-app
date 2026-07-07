@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вибір місця — SkyTicket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/seat-selection.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/logo.svg">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="SkyTicket">
+                <span>SkyTicket</span>
+            </a>
+            <nav class="nav">
+                <a href="search.html" class="nav-link">Пошук</a>
+                <a href="profile.html" class="nav-link">Профіль</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="seat-selection">
+        <div class="container">
+            <h2>Виберіть місце в салоні</h2>
+            <p class="flight-info">Рейс: PS 123 • Київ → Лондон • 15.06.2026</p>
+            
+            <div class="seat-map" id="seatMap">
+                <!-- Схема салону генерується через JS -->
+            </div>
+
+            <div class="seat-legend">
+                <span><span class="legend-color available"></span> Вільно</span>
+                <span><span class="legend-color selected"></span> Обрано</span>
+                <span><span class="legend-color taken"></span> Зайнято</span>
+                <span><span class="legend-color premium"></span> Premium (доплата)</span>
+            </div>
+
+            <div class="seat-actions">
+                <button class="btn btn-secondary" id="backBtn">← Назад</button>
+                <button class="btn btn-primary" id="confirmSeats">Підтвердити місця →</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SkyTicket. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/seat-selection.js"></script>
+</body>
+</html>

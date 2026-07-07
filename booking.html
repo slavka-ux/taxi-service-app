@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронювання — SkyTicket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/logo.svg">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="SkyTicket">
+                <span>SkyTicket</span>
+            </a>
+            <nav class="nav">
+                <a href="search.html" class="nav-link">Пошук</a>
+                <a href="profile.html" class="nav-link">Профіль</a>
+                <a href="loyalty.html" class="nav-link">Бонуси</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Увійти</button>
+                <button class="btn btn-primary">Реєстрація</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Степер (кроки бронювання) -->
+    <section class="booking-stepper">
+        <div class="container">
+            <div class="stepper">
+                <div class="step active">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Дані пасажира</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Вибір місця</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Додаткові послуги</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <span class="step-label">Оплата</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Крок 1: Дані пасажира -->
+    <section class="booking-step" id="step1">
+        <div class="container">
+            <div class="booking-card">
+                <h2>Дані пасажира</h2>
+                <form id="passengerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Ім'я</label>
+                            <input type="text" id="firstName" placeholder="Введіть ім'я" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Прізвище</label>
+                            <input type="text" id="lastName" placeholder="Введіть прізвище" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="birthDate">Дата народження</label>
+                            <input type="date" id="birthDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passport">Номер паспорта</label>
+                            <input type="text" id="passport" placeholder="Введіть номер паспорта" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="example@mail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" placeholder="+380 XX XXX XX XX" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-next">Продовжити →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Крок 2: Вибір місця (посилання на seat-selection.html) -->
+    <!-- Крок 3: Додаткові послуги -->
+    <!-- Крок 4: Оплата (посилання на payment.html) -->
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SkyTicket. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>
