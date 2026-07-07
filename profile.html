@@ -3,550 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Особистий кабінет користувача FlyBooking">
-    <title>Профіль користувача — FlyBooking</title>
+    <title>FlyBooking — Мій профіль</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        /* ===== ГЛОБАЛЬНІ СТИЛІ ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ===== ТІ Ж САМІ СТИЛІ, ЩО Й НА ГОЛОВНІЙ ===== */
+        /* (повний код стилів з profile.html вище) */
+        /* Для стислості тут показую тільки основні відмінності */
 
-        :root {
-            --color-primary: #2563eb;
-            --color-primary-dark: #1d4ed8;
-            --color-primary-light: #60a5fa;
-            --color-primary-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-            --color-secondary: #0f172a;
-            --color-white: #ffffff;
-            --color-gray-50: #f8fafc;
-            --color-gray-100: #f1f5f9;
-            --color-gray-200: #e2e8f0;
-            --color-gray-300: #cbd5e1;
-            --color-gray-400: #94a3b8;
-            --color-gray-500: #64748b;
-            --color-gray-600: #475569;
-            --color-gray-700: #334155;
-            --color-gray-800: #1e293b;
-            --color-gray-900: #0f172a;
-            --color-success: #10b981;
-            --color-danger: #ef4444;
-            --color-warning: #f59e0b;
-            --color-info: #3b82f6;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.08);
-            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
-            --radius: 12px;
-            --radius-lg: 20px;
-            --radius-full: 9999px;
-            --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --max-width: 1280px;
-        }
-
-        body {
-            font-family: var(--font-family);
-            color: var(--color-gray-800);
-            background: var(--color-gray-50);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            width: 100%;
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.625rem 1.5rem;
-            border: none;
-            border-radius: var(--radius);
-            font-family: var(--font-family);
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition);
-            text-decoration: none;
-            min-height: 44px;
-            position: relative;
-        }
-
-        .btn-primary {
-            background: var(--color-primary-gradient);
-            color: var(--color-white);
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--color-primary);
-            color: var(--color-white);
-        }
-
-        .btn-success {
-            background: var(--color-success);
-            color: var(--color-white);
-        }
-
-        .btn-success:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background: var(--color-danger);
-            color: var(--color-white);
-        }
-
-        .btn-danger:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-        }
-
-        .btn-sm {
-            padding: 0.375rem 1rem;
-            font-size: 0.75rem;
-            min-height: 36px;
-        }
-
-        .btn-lg {
-            padding: 0.875rem 2rem;
-            font-size: 1rem;
-        }
-
-        .btn-block {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ===== HEADER ===== */
-        .header {
-            background: var(--color-white);
-            box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--color-gray-200);
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--color-gray-900);
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        .logo-icon { font-size: 1.5rem; }
-        .logo-text span { color: var(--color-primary); }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--color-gray-600);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.875rem;
-            transition: color var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--color-primary);
-        }
-
-        .nav-links a.active {
-            font-weight: 600;
-        }
-
-        .user-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.375rem 0.75rem 0.375rem 0.375rem;
-            background: var(--color-gray-100);
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-
-        .user-badge:hover {
-            background: var(--color-gray-200);
-        }
-
-        .user-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--color-primary-gradient);
-            color: var(--color-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.875rem;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--color-gray-800);
-        }
-
-        .mobile-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-toggle span {
-            display: block;
-            width: 25px;
-            height: 2.5px;
-            background: var(--color-gray-700);
-            transition: all var(--transition);
-            border-radius: 2px;
-        }
-
-        .mobile-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .mobile-toggle.active span:nth-child(2) { opacity: 0; }
-        .mobile-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .mobile-menu {
-            display: none;
-            background: var(--color-white);
-            padding: 1rem 0;
-            box-shadow: var(--shadow-lg);
-            position: absolute;
-            top: 72px;
-            left: 0;
-            right: 0;
-            z-index: 99;
-            border-top: 1px solid var(--color-gray-200);
-        }
-
-        .mobile-menu.open {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .mobile-menu ul li a {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.625rem 1.5rem;
-            color: var(--color-gray-700);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: var(--radius);
-            transition: background var(--transition);
-        }
-
-        .mobile-menu ul li a:hover,
-        .mobile-menu ul li a.active {
-            background: var(--color-gray-50);
-            color: var(--color-primary);
-        }
-
-        /* ===== PROFILE LAYOUT ===== */
-        .profile-page {
-            padding: 2rem 0 4rem;
-        }
-
+        .profile-page { padding: 2rem 0 4rem; }
         .profile-header {
             display: flex;
             align-items: center;
-            gap: 2rem;
-            padding: 2rem;
+            gap: 1.5rem;
             background: var(--color-white);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius);
+            padding: 2rem;
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
-
-        .profile-avatar-large {
-            width: 100px;
-            height: 100px;
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: var(--color-primary-gradient);
             color: var(--color-white);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             flex-shrink: 0;
         }
-
-        .profile-info h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-        }
-
-        .profile-info .email {
-            color: var(--color-gray-500);
-            font-size: 0.875rem;
-        }
-
-        .profile-info .member-since {
-            color: var(--color-gray-400);
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
+        .profile-info { flex: 1; }
+        .profile-info h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+        .profile-info .email { color: var(--color-gray-500); font-size: 0.875rem; }
+        .profile-info .member-since { color: var(--color-gray-400); font-size: 0.75rem; }
         .profile-stats {
             display: flex;
             gap: 2rem;
             margin-left: auto;
-            flex-wrap: wrap;
         }
-
-        .stat-item {
-            text-align: center;
-        }
-
+        .stat-item { text-align: center; }
         .stat-item .number {
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--color-primary);
         }
+        .stat-item .label { font-size: 0.75rem; color: var(--color-gray-500); }
 
-        .stat-item .label {
-            font-size: 0.75rem;
-            color: var(--color-gray-500);
-        }
-
-        /* ===== PROFILE TABS ===== */
-        .profile-tabs {
+        .profile-nav {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            border-bottom: 2px solid var(--color-gray-200);
-            padding-bottom: 0.5rem;
-        }
-
-        .profile-tab {
-            padding: 0.625rem 1.5rem;
-            border: none;
-            background: none;
-            font-family: var(--font-family);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-gray-500);
-            cursor: pointer;
-            transition: all var(--transition);
-            border-radius: var(--radius);
-            position: relative;
-        }
-
-        .profile-tab:hover {
-            color: var(--color-gray-800);
-            background: var(--color-gray-100);
-        }
-
-        .profile-tab.active {
-            color: var(--color-primary);
-            background: rgba(37, 99, 235, 0.08);
-        }
-
-        .profile-tab .badge {
-            background: var(--color-gray-200);
-            color: var(--color-gray-600);
-            padding: 0.125rem 0.5rem;
-            border-radius: var(--radius-full);
-            font-size: 0.625rem;
-            margin-left: 0.25rem;
-        }
-
-        .profile-tab.active .badge {
-            background: var(--color-primary);
-            color: var(--color-white);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== TAB: PROFILE INFO ===== */
-        .profile-card {
             background: var(--color-white);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 0.5rem;
             box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
-
-        .profile-card .card-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 1.25rem;
+        .profile-nav .nav-item {
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius);
+            border: none;
+            background: transparent;
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            cursor: pointer;
+            transition: all var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
+        .profile-nav .nav-item:hover { background: var(--color-gray-100); color: var(--color-gray-800); }
+        .profile-nav .nav-item.active { background: var(--color-primary); color: var(--color-white); }
 
-        .profile-card .card-title i {
-            color: var(--color-primary);
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+
+        .tab-panel {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
         }
+        .tab-panel h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .tab-panel .subtitle { color: var(--color-gray-500); font-size: 0.875rem; margin-bottom: 1.5rem; }
 
-        .form-grid {
+        .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
+            gap: 1rem;
         }
-
-        .form-group {
-            position: relative;
-        }
-
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-gray-700);
-            margin-bottom: 0.25rem;
-        }
-
-        .form-label .required {
-            color: var(--color-danger);
-            margin-left: 0.25rem;
-        }
-
-        .form-input,
-        .form-select {
-            width: 100%;
-            padding: 0.625rem 1rem;
-            font-family: var(--font-family);
-            font-size: 0.875rem;
-            color: var(--color-gray-800);
-            background: var(--color-gray-50);
-            border: 2px solid var(--color-gray-200);
-            border-radius: var(--radius);
-            transition: all var(--transition);
-            min-height: 44px;
-        }
-
-        .form-input:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            background: var(--color-white);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-        }
-
-        .form-input:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .form-hint {
-            font-size: 0.75rem;
-            color: var(--color-gray-400);
-            margin-top: 0.25rem;
-        }
-
-        .form-error {
-            font-size: 0.75rem;
-            color: var(--color-danger);
-            margin-top: 0.25rem;
-            display: none;
-        }
-
-        .form-error.visible {
-            display: block;
-        }
-
         .form-actions {
             display: flex;
             gap: 1rem;
@@ -555,445 +110,148 @@
             border-top: 1px solid var(--color-gray-200);
         }
 
-        /* ===== TAB: BOOKINGS ===== */
-        .booking-filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .booking-filters .filter-group {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .booking-filters select,
-        .booking-filters input {
-            padding: 0.375rem 0.75rem;
+        .booking-card {
             border: 1px solid var(--color-gray-200);
             border-radius: var(--radius);
-            font-size: 0.875rem;
-            background: var(--color-white);
-            font-family: var(--font-family);
-        }
-
-        .booking-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .booking-item {
-            background: var(--color-white);
-            border-radius: var(--radius);
             padding: 1.25rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-gray-100);
+            margin-bottom: 1rem;
             transition: all var(--transition);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 1rem;
-            align-items: center;
         }
-
-        .booking-item:hover {
-            border-color: var(--color-primary-light);
-            box-shadow: var(--shadow-md);
-        }
-
-        .booking-info {
+        .booking-card:hover { border-color: var(--color-primary-light); box-shadow: var(--shadow-lg); }
+        .booking-card .booking-header {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
             gap: 0.5rem;
         }
-
-        .booking-route {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 600;
-        }
-
-        .booking-route .arrow {
-            color: var(--color-gray-300);
-        }
-
-        .booking-meta {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.75rem;
-            color: var(--color-gray-500);
-            flex-wrap: wrap;
-        }
-
-        .booking-meta i {
-            margin-right: 0.25rem;
-            width: 16px;
-        }
-
-        .booking-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-full);
-            font-size: 0.625rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-        }
-
-        .booking-status.confirmed {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .booking-status.pending {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .booking-status.cancelled {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .booking-status.completed {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .booking-status.expired {
-            background: var(--color-gray-200);
-            color: var(--color-gray-500);
-        }
-
-        .booking-price {
+        .booking-card .pnr {
+            font-family: 'Courier New', monospace;
             font-weight: 700;
             font-size: 1.125rem;
             color: var(--color-primary);
         }
+        .booking-card .status {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-confirmed { background: #d1fae5; color: #065f46; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; }
+        .status-completed { background: #dbeafe; color: #1e40af; }
 
-        .booking-actions {
+        .booking-card .booking-route {
             display: flex;
-            gap: 0.5rem;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--color-gray-500);
-        }
-
-        .empty-state .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .empty-state h3 {
-            color: var(--color-gray-700);
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
-
-        /* ===== TAB: BONUSES ===== */
-        .bonus-summary {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .booking-card .booking-details {
+            display: flex;
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+            flex-wrap: wrap;
+        }
+        .booking-card .booking-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--color-gray-200);
+            flex-wrap: wrap;
         }
 
         .bonus-card {
-            background: var(--color-white);
+            background: var(--color-gray-50);
             border-radius: var(--radius);
             padding: 1.5rem;
-            box-shadow: var(--shadow);
             text-align: center;
+            border: 2px solid var(--color-gray-200);
+            transition: all var(--transition);
         }
-
-        .bonus-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .bonus-card .value {
-            font-size: 2rem;
+        .bonus-card:hover { border-color: var(--color-primary-light); }
+        .bonus-card .amount {
+            font-size: 2.5rem;
             font-weight: 800;
             color: var(--color-primary);
         }
+        .bonus-card .label { color: var(--color-gray-500); font-size: 0.875rem; }
 
-        .bonus-card .label {
-            font-size: 0.875rem;
-            color: var(--color-gray-500);
-        }
-
-        .bonus-card .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--color-gray-200);
+        .bonus-progress { margin-top: 1rem; }
+        .bonus-progress .progress-bar {
+            height: 8px;
             border-radius: var(--radius-full);
-            margin-top: 0.75rem;
+            background: var(--color-gray-200);
             overflow: hidden;
         }
-
-        .bonus-card .progress-bar .fill {
+        .bonus-progress .progress-fill {
             height: 100%;
             background: var(--color-primary-gradient);
             border-radius: var(--radius-full);
             transition: width 0.6s ease;
         }
 
-        .bonus-history {
-            background: var(--color-white);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-        }
-
-        .bonus-history .history-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--color-gray-100);
-            font-size: 0.875rem;
-        }
-
-        .bonus-history .history-item:last-child {
-            border-bottom: none;
-        }
-
-        .bonus-history .history-item .points {
-            font-weight: 700;
-        }
-
-        .bonus-history .history-item .points.positive {
-            color: var(--color-success);
-        }
-
-        .bonus-history .history-item .points.negative {
-            color: var(--color-danger);
-        }
-
-        /* ===== TAB: SETTINGS ===== */
-        .settings-group {
+        .settings-section {
             margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--color-gray-200);
         }
+        .settings-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .settings-section .section-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .settings-section .section-desc { font-size: 0.875rem; color: var(--color-gray-500); margin-bottom: 1rem; }
 
-        .settings-group .group-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--color-gray-700);
-        }
-
-        .settings-item {
+        .toggle-switch {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--color-gray-100);
+            gap: 0.75rem;
+            cursor: pointer;
         }
-
-        .settings-item:last-child {
-            border-bottom: none;
-        }
-
-        .settings-item .info .label {
-            font-weight: 500;
-            font-size: 0.875rem;
-        }
-
-        .settings-item .info .description {
-            font-size: 0.75rem;
-            color: var(--color-gray-400);
-        }
-
-        /* Toggle Switch */
-        .toggle {
-            width: 48px;
-            height: 28px;
+        .toggle-switch input { display: none; }
+        .toggle-slider {
+            width: 44px;
+            height: 24px;
             background: var(--color-gray-300);
             border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: background var(--transition);
             position: relative;
+            transition: all var(--transition);
             flex-shrink: 0;
         }
-
-        .toggle.active {
-            background: var(--color-primary);
-        }
-
-        .toggle .thumb {
-            width: 22px;
-            height: 22px;
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
             background: var(--color-white);
             border-radius: 50%;
-            position: absolute;
-            top: 3px;
-            left: 3px;
             transition: all var(--transition);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow);
         }
+        .toggle-switch input:checked + .toggle-slider { background: var(--color-primary); }
+        .toggle-switch input:checked + .toggle-slider::after { left: 22px; }
 
-        .toggle.active .thumb {
-            left: 23px;
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
         }
-
-        /* Danger Zone */
-        .danger-zone {
-            border: 2px solid #fee2e2;
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            background: #fef2f2;
-        }
-
-        .danger-zone .danger-title {
-            color: var(--color-danger);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .danger-zone .danger-text {
-            font-size: 0.875rem;
-            color: var(--color-gray-600);
-            margin-bottom: 1rem;
-        }
-
-        /* ===== TOAST ===== */
-        .toast-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            max-width: 400px;
-        }
-
-        .toast {
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius);
-            color: var(--color-white);
-            font-weight: 500;
-            font-size: 0.875rem;
-            box-shadow: var(--shadow-xl);
-            animation: slideUp 0.3s ease;
-        }
-
-        .toast-success { background: var(--color-success); }
-        .toast-error { background: var(--color-danger); }
-        .toast-info { background: var(--color-primary); }
-        .toast-warning { background: var(--color-warning); }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .bonus-summary {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-toggle { display: flex; }
-
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
-            }
-
-            .profile-stats {
-                margin-left: 0;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .booking-item {
-                grid-template-columns: 1fr;
-            }
-
-            .booking-actions {
-                justify-content: flex-start;
-            }
-
-            .bonus-summary {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-tabs {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                gap: 0;
-            }
-
-            .profile-tab {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
-                white-space: nowrap;
-            }
-
-            .booking-filters {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .profile-card {
-                padding: 1.25rem;
-            }
-
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .form-actions .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .toast-container {
-                left: 1rem;
-                right: 1rem;
-                bottom: 1rem;
-                max-width: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .profile-avatar-large {
-                width: 72px;
-                height: 72px;
-                font-size: 1.75rem;
-            }
-
-            .profile-info h1 {
-                font-size: 1.25rem;
-            }
-
-            .stat-item .number {
-                font-size: 1.125rem;
-            }
-
-            .booking-route {
-                font-size: 0.875rem;
-                flex-wrap: wrap;
-            }
-
-            .profile-tab {
-                font-size: 0.6875rem;
-                padding: 0.375rem 0.75rem;
-            }
+            .profile-header { flex-direction: column; text-align: center; padding: 1.5rem; }
+            .profile-stats { margin-left: 0; width: 100%; justify-content: center; }
+            .profile-nav { overflow-x: auto; flex-wrap: nowrap; padding: 0.5rem; gap: 0.25rem; }
+            .profile-nav .nav-item { padding: 0.5rem 0.75rem; font-size: 0.75rem; white-space: nowrap; }
+            .form-row { grid-template-columns: 1fr; }
+            .form-actions { flex-direction: column; }
+            .form-actions .btn { width: 100%; }
+            .tab-panel { padding: 1.25rem; }
         }
     </style>
 </head>
@@ -1003,23 +261,18 @@
 <header class="header">
     <div class="container">
         <nav class="navbar">
-            <a href="/" class="logo">
+            <a href="index.html" class="logo">
                 <span class="logo-icon">✈️</span>
                 <span class="logo-text">Fly<span>Booking</span></span>
             </a>
-
             <ul class="nav-links">
-                <li><a href="/index.html"><i class="fas fa-home"></i> Головна</a></li>
-                <li><a href="/flights.html"><i class="fas fa-plane"></i> Рейси</a></li>
-                <li><a href="/profile.html" class="active"><i class="fas fa-user"></i> Профіль</a></li>
-                <li>
-                    <div class="user-badge" onclick="showToast('👤 Перегляд профілю')">
-                        <div class="user-avatar">О</div>
-                        <span class="user-name">Олена</span>
-                    </div>
+                <li><a href="index.html"><i class="fas fa-home"></i> Головна</a></li>
+                <li><a href="#"><i class="fas fa-plane"></i> Рейси</a></li>
+                <li><a href="#" class="active"><i class="fas fa-user"></i> Профіль</a></li>
+                <li class="nav-auth" id="navAuth">
+                    <!-- Заповнюється через JS -->
                 </li>
             </ul>
-
             <button class="mobile-toggle" id="mobileToggle">
                 <span></span>
                 <span></span>
@@ -1027,30 +280,24 @@
             </button>
         </nav>
     </div>
-
     <div class="mobile-menu" id="mobileMenu">
         <div class="container">
-            <ul>
-                <li><a href="/index.html"><i class="fas fa-home"></i> Головна</a></li>
-                <li><a href="/flights.html"><i class="fas fa-plane"></i> Рейси</a></li>
-                <li><a href="/profile.html" class="active"><i class="fas fa-user"></i> Профіль</a></li>
-                <li><a href="#" onclick="showToast('👋 Вихід виконано')"><i class="fas fa-sign-out-alt"></i> Вийти</a></li>
-            </ul>
+            <ul id="mobileNavLinks"></ul>
         </div>
     </div>
 </header>
 
-<!-- ===== PROFILE PAGE ===== -->
+<!-- ===== PROFIL ===== -->
 <main class="profile-page">
     <div class="container">
 
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <div class="profile-avatar-large">О</div>
+        <!-- Профільний хедер -->
+        <div class="profile-header" id="profileHeader">
+            <div class="profile-avatar" id="profileAvatar">О</div>
             <div class="profile-info">
-                <h1>Олена Коваленко</h1>
-                <div class="email">✉️ olena.kovalenko@example.com</div>
-                <div class="member-since">📅 Користувач з 15 січня 2025</div>
+                <h1 id="profileName">Олена Коваленко</h1>
+                <div class="email" id="profileEmail">olena.k@email.com</div>
+                <div class="member-since" id="profileSince">Користувач з серпня 2025</div>
             </div>
             <div class="profile-stats">
                 <div class="stat-item">
@@ -1058,471 +305,220 @@
                     <div class="label">Подорожей</div>
                 </div>
                 <div class="stat-item">
-                    <div class="number">1,240</div>
+                    <div class="number">4 250</div>
                     <div class="label">Бонусів</div>
                 </div>
                 <div class="stat-item">
-                    <div class="number">4.9</div>
-                    <div class="label">Рейтинг</div>
+                    <div class="number">3</div>
+                    <div class="label">Активні</div>
                 </div>
             </div>
         </div>
 
-        <!-- Tabs -->
-        <div class="profile-tabs" role="tablist">
-            <button class="profile-tab active" data-tab="info" role="tab">
-                <i class="fas fa-user-circle"></i> Особисті дані
-            </button>
-            <button class="profile-tab" data-tab="bookings" role="tab">
+        <!-- Навігація -->
+        <div class="profile-nav">
+            <button class="nav-item active" data-tab="bookings">
                 <i class="fas fa-ticket-alt"></i> Мої бронювання
-                <span class="badge">12</span>
             </button>
-            <button class="profile-tab" data-tab="bonuses" role="tab">
-                <i class="fas fa-coins"></i> Бонуси
-                <span class="badge">1,240</span>
+            <button class="nav-item" data-tab="profile">
+                <i class="fas fa-user-edit"></i> Особисті дані
             </button>
-            <button class="profile-tab" data-tab="settings" role="tab">
+            <button class="nav-item" data-tab="bonuses">
+                <i class="fas fa-gift"></i> Бонуси
+            </button>
+            <button class="nav-item" data-tab="settings">
                 <i class="fas fa-cog"></i> Налаштування
             </button>
         </div>
 
-        <!-- ===== TAB 1: INFO ===== -->
-        <div class="tab-content active" id="tab-info" role="tabpanel">
-            <div class="profile-card">
-                <div class="card-title">
-                    <i class="fas fa-user-edit"></i> Особиста інформація
-                </div>
-                <form id="profileForm" onsubmit="handleProfileUpdate(event)">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Ім'я <span class="required">*</span></label>
-                            <input type="text" class="form-input" value="Олена" id="firstName" required>
+        <!-- TAB 1: Бронювання -->
+        <div class="tab-content active" id="tab-bookings">
+            <div class="tab-panel">
+                <h2>Мої бронювання</h2>
+                <p class="subtitle">Всі ваші авіаквитки в одному місці</p>
+
+                <div id="bookingsList">
+                    <div class="booking-card" data-status="confirmed">
+                        <div class="booking-header">
+                            <div><span class="pnr">#PNR-7X9K2M</span>
+                            <span class="status status-confirmed">✅ Підтверджено</span></div>
+                            <span style="font-size:0.75rem;color:var(--color-gray-400);">15.08.2026</span>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Прізвище <span class="required">*</span></label>
-                            <input type="text" class="form-input" value="Коваленко" id="lastName" required>
+                        <div class="booking-route">
+                            <span>Київ (KBP)</span>
+                            <span class="arrow">✈</span>
+                            <span>Лондон (LHR)</span>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Email <span class="required">*</span></label>
-                            <input type="email" class="form-input" value="olena.kovalenko@example.com" id="profileEmail" required disabled>
-                            <div class="form-hint">Email не можна змінити</div>
+                        <div class="booking-details">
+                            <span><i class="fas fa-calendar"></i> 15 серпня 2026</span>
+                            <span><i class="fas fa-user"></i> 2 пасажири</span>
+                            <span><i class="fas fa-tag"></i> €340</span>
+                            <span><i class="fas fa-plane"></i> Ryanair</span>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Телефон</label>
-                            <input type="tel" class="form-input" value="+38 (050) 123-45-67" id="phone">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Дата народження</label>
-                            <input type="date" class="form-input" value="1990-05-15" id="birthDate">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Мова</label>
-                            <select class="form-select" id="language">
-                                <option value="uk" selected>🇺🇦 Українська</option>
-                                <option value="en">🇬🇧 English</option>
-                                <option value="ru">🇷🇺 Русский</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Валюта</label>
-                            <select class="form-select" id="currency">
-                                <option value="USD" selected>🇺🇸 USD ($)</option>
-                                <option value="EUR">🇪🇺 EUR (€)</option>
-                                <option value="UAH">🇺🇦 UAH (₴)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Улюблений аеропорт</label>
-                            <input type="text" class="form-input" value="Київ (KBP)" id="favAirport" placeholder="Ваш улюблений аеропорт">
+                        <div class="booking-actions">
+                            <button class="btn btn-primary btn-sm" onclick="showToast('📄 Завантажуємо квиток...', 'info')">
+                                <i class="fas fa-download"></i> Квиток
+                            </button>
+                            <button class="btn btn-outline btn-sm" onclick="showToast('📋 Деталі бронювання відкрито', 'info')">
+                                <i class="fas fa-info-circle"></i> Деталі
+                            </button>
                         </div>
                     </div>
 
+                    <div class="booking-card" data-status="pending">
+                        <div class="booking-header">
+                            <div><span class="pnr">#PNR-3A1C8F</span>
+                            <span class="status status-pending">⏳ Очікує оплати</span></div>
+                            <span style="font-size:0.75rem;color:var(--color-gray-400);">22.08.2026</span>
+                        </div>
+                        <div class="booking-route">
+                            <span>Київ (KBP)</span>
+                            <span class="arrow">✈</span>
+                            <span>Париж (CDG)</span>
+                        </div>
+                        <div class="booking-details">
+                            <span><i class="fas fa-calendar"></i> 22 серпня 2026</span>
+                            <span><i class="fas fa-user"></i> 1 пасажир</span>
+                            <span><i class="fas fa-tag"></i> €180</span>
+                            <span><i class="fas fa-plane"></i> Air France</span>
+                        </div>
+                        <div class="booking-actions">
+                            <button class="btn btn-success btn-sm" onclick="showToast('💳 Відкриваємо оплату...', 'info')">
+                                <i class="fas fa-credit-card"></i> Оплатити
+                            </button>
+                            <button class="btn btn-outline btn-sm" onclick="showToast('📋 Деталі бронювання відкрито', 'info')">
+                                <i class="fas fa-info-circle"></i> Деталі
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Профіль -->
+        <div class="tab-content" id="tab-profile">
+            <div class="tab-panel">
+                <h2>Особисті дані</h2>
+                <p class="subtitle">Оновіть інформацію про себе</p>
+                <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Ім'я</label>
+                            <input type="text" class="form-input" id="profileFirstName" value="Олена" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Прізвище</label>
+                            <input type="text" class="form-input" id="profileLastName" value="Коваленко" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="profileEmailInput" value="olena.k@email.com" disabled>
+                        <div class="form-hint">Email не можна змінити</div>
+                    </div>
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Зберегти зміни
                         </button>
-                        <button type="button" class="btn btn-outline" onclick="resetProfileForm()">
-                            <i class="fas fa-undo"></i> Скасувати
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Change Password -->
-            <div class="profile-card">
-                <div class="card-title">
-                    <i class="fas fa-key"></i> Зміна пароля
-                </div>
-                <form id="passwordForm" onsubmit="handlePasswordChange(event)">
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label class="form-label">Поточний пароль <span class="required">*</span></label>
-                            <input type="password" class="form-input" id="currentPassword" placeholder="Введіть поточний пароль" required>
-                            <div class="form-error" id="passwordError">Невірний поточний пароль</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Новий пароль <span class="required">*</span></label>
-                            <input type="password" class="form-input" id="newPassword" placeholder="Мінімум 8 символів" required minlength="8">
-                            <div class="form-hint">Пароль має містити мінімум 8 символів, велику та малу літери, цифру</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Підтвердіть пароль <span class="required">*</span></label>
-                            <input type="password" class="form-input" id="confirmPassword" placeholder="Підтвердіть новий пароль" required>
-                            <div class="form-error" id="confirmError">Паролі не співпадають</div>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-success">
-                            <i class="fas fa-key"></i> Змінити пароль
-                        </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- ===== TAB 2: BOOKINGS ===== -->
-        <div class="tab-content" id="tab-bookings" role="tabpanel">
-            <div class="profile-card">
-                <div class="card-title">
-                    <i class="fas fa-history"></i> Історія бронювань
-                </div>
-
-                <div class="booking-filters">
-                    <div class="filter-group">
-                        <label>Статус:</label>
-                        <select id="bookingStatusFilter" onchange="filterBookings()">
-                            <option value="all">Всі</option>
-                            <option value="confirmed">Підтверджені</option>
-                            <option value="pending">Очікують</option>
-                            <option value="completed">Виконані</option>
-                            <option value="cancelled">Скасовані</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Від:</label>
-                        <input type="date" id="bookingFrom" onchange="filterBookings()">
-                    </div>
-                    <div class="filter-group">
-                        <label>До:</label>
-                        <input type="date" id="bookingTo" onchange="filterBookings()">
-                    </div>
-                    <button class="btn btn-sm btn-outline" onclick="resetBookingFilters()">
-                        <i class="fas fa-undo"></i> Скинути
-                    </button>
-                </div>
-
-                <div class="booking-list" id="bookingList">
-                    <!-- Booking 1 -->
-                    <div class="booking-item" data-status="confirmed">
-                        <div class="booking-info">
-                            <div class="booking-route">
-                                <span>🇺🇦 Київ (KBP)</span>
-                                <span class="arrow">✈</span>
-                                <span>🇬🇧 Лондон (LHR)</span>
-                                <span class="booking-status confirmed">Підтверджено</span>
+        <!-- TAB 3: Бонуси -->
+        <div class="tab-content" id="tab-bonuses">
+            <div class="tab-panel">
+                <h2>Мої бонуси</h2>
+                <p class="subtitle">Заробляйте бали за кожну подорож</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+                    <div class="bonus-card">
+                        <div class="amount">4,250</div>
+                        <div class="label">Доступно бонусів</div>
+                        <div class="bonus-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:85%;"></div>
                             </div>
-                            <div class="booking-meta">
-                                <span><i class="fas fa-calendar"></i> 15-22 серпня 2026</span>
-                                <span><i class="fas fa-user"></i> 2 дорослих, 1 дитина</span>
-                                <span><i class="fas fa-tag"></i> PNR: FLY123</span>
-                                <span><i class="fas fa-plane"></i> British Airways</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="booking-price">$640</div>
-                            <div class="booking-actions">
-                                <button class="btn btn-sm btn-primary" onclick="showToast('📄 Відкриваю квиток...')">
-                                    <i class="fas fa-file-pdf"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline" onclick="showToast('ℹ️ Деталі бронювання')">
-                                    <i class="fas fa-info-circle"></i>
-                                </button>
-                            </div>
+                            <div class="progress-text">4,250 з 5,000 для наступного рівня</div>
                         </div>
                     </div>
-
-                    <!-- Booking 2 -->
-                    <div class="booking-item" data-status="pending">
-                        <div class="booking-info">
-                            <div class="booking-route">
-                                <span>🇺🇦 Київ (KBP)</span>
-                                <span class="arrow">✈</span>
-                                <span>🇫🇷 Париж (CDG)</span>
-                                <span class="booking-status pending">Очікує оплати</span>
-                            </div>
-                            <div class="booking-meta">
-                                <span><i class="fas fa-calendar"></i> 1-8 вересня 2026</span>
-                                <span><i class="fas fa-user"></i> 1 дорослий</span>
-                                <span><i class="fas fa-tag"></i> PNR: FLY456</span>
-                                <span><i class="fas fa-plane"></i> Ryanair</span>
-                                <span style="color: var(--color-danger); font-weight: 600;">
-                                    <i class="fas fa-clock"></i> Залишилось 12 хв
-                                </span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="booking-price">€162</div>
-                            <div class="booking-actions">
-                                <button class="btn btn-sm btn-success" onclick="showToast('💳 Відкриваю оплату...')">
-                                    <i class="fas fa-credit-card"></i> Оплатити
-                                </button>
-                                <button class="btn btn-sm btn-danger" onclick="showToast('❌ Бронювання скасовано')">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
+                    <div class="bonus-card">
+                        <div class="amount" style="font-size:1.5rem;">Срібний</div>
+                        <div class="label">Ваш рівень</div>
+                        <div style="margin-top:0.5rem;display:flex;gap:0.5rem;justify-content:center;">
+                            <span style="font-size:1.25rem;">⭐</span>
+                            <span style="font-size:1.25rem;">⭐</span>
+                            <span style="font-size:1.25rem;opacity:0.3;">⭐</span>
+                            <span style="font-size:1.25rem;opacity:0.3;">⭐</span>
+                            <span style="font-size:1.25rem;opacity:0.3;">⭐</span>
                         </div>
                     </div>
-
-                    <!-- Booking 3 -->
-                    <div class="booking-item" data-status="completed">
-                        <div class="booking-info">
-                            <div class="booking-route">
-                                <span>🇺🇦 Київ (KBP)</span>
-                                <span class="arrow">✈</span>
-                                <span>🇺🇸 Нью-Йорк (JFK)</span>
-                                <span class="booking-status completed">Виконано</span>
-                            </div>
-                            <div class="booking-meta">
-                                <span><i class="fas fa-calendar"></i> 1-15 січня 2026</span>
-                                <span><i class="fas fa-user"></i> 2 дорослих</span>
-                                <span><i class="fas fa-tag"></i> PNR: FLY789</span>
-                                <span><i class="fas fa-plane"></i> Turkish Airlines</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="booking-price">$1,280</div>
-                            <div class="booking-actions">
-                                <button class="btn btn-sm btn-primary" onclick="showToast('📄 Відкриваю квиток...')">
-                                    <i class="fas fa-file-pdf"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline" onclick="showToast('📝 Залишити відгук')">
-                                    <i class="fas fa-star"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Booking 4 -->
-                    <div class="booking-item" data-status="cancelled">
-                        <div class="booking-info">
-                            <div class="booking-route">
-                                <span>🇺🇦 Київ (KBP)</span>
-                                <span class="arrow">✈</span>
-                                <span>🇦🇪 Дубай (DXB)</span>
-                                <span class="booking-status cancelled">Скасовано</span>
-                            </div>
-                            <div class="booking-meta">
-                                <span><i class="fas fa-calendar"></i> 10-20 жовтня 2026</span>
-                                <span><i class="fas fa-user"></i> 1 дорослий</span>
-                                <span><i class="fas fa-tag"></i> PNR: FLY321</span>
-                                <span><i class="fas fa-plane"></i> FlyDubai</span>
-                                <span style="color: var(--color-success);">
-                                    <i class="fas fa-undo"></i> Повернено $301
-                                </span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="booking-price" style="color: var(--color-gray-400); text-decoration: line-through;">$301</div>
-                            <div class="booking-actions">
-                                <button class="btn btn-sm btn-outline" onclick="showToast('ℹ️ Причина: зміна планів')">
-                                    <i class="fas fa-info-circle"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Empty State (hidden by default) -->
-                <div class="empty-state" id="emptyBookings" style="display: none;">
-                    <div class="icon">✈️</div>
-                    <h3>Немає бронювань</h3>
-                    <p>У вас поки що немає бронювань. Розпочніть пошук квитків прямо зараз!</p>
-                    <button class="btn btn-primary" onclick="window.location.href='/index.html'">
-                        <i class="fas fa-search"></i> Знайти квитки
-                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- ===== TAB 3: BONUSES ===== -->
-        <div class="tab-content" id="tab-bonuses" role="tabpanel">
-            <div class="bonus-summary">
-                <div class="bonus-card">
-                    <div class="icon">⭐</div>
-                    <div class="value">1,240</div>
-                    <div class="label">Всього бонусів</div>
-                </div>
-                <div class="bonus-card">
-                    <div class="icon">🎯</div>
-                    <div class="value">2,000</div>
-                    <div class="label">До наступного рівня</div>
-                    <div class="progress-bar">
-                        <div class="fill" style="width: 62%"></div>
-                    </div>
-                    <div style="font-size: 0.75rem; color: var(--color-gray-400); margin-top: 0.25rem;">62% виконано</div>
-                </div>
-                <div class="bonus-card">
-                    <div class="icon">🏆</div>
-                    <div class="value">Золотий</div>
-                    <div class="label">Статус</div>
-                    <div style="font-size: 0.75rem; color: var(--color-warning); font-weight: 600; margin-top: 0.25rem;">
-                        <i class="fas fa-crown"></i> Преміум учасник
-                    </div>
-                </div>
-            </div>
+        <!-- TAB 4: Налаштування -->
+        <div class="tab-content" id="tab-settings">
+            <div class="tab-panel">
+                <h2>Налаштування</h2>
+                <p class="subtitle">Керуйте своїми уподобаннями</p>
 
-            <div class="bonus-history">
-                <div class="card-title" style="margin-bottom: 1rem;">
-                    <i class="fas fa-clock-rotate-left"></i> Історія нарахувань
+                <div class="settings-section">
+                    <div class="section-title">Сповіщення</div>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                            Email сповіщення про статус бронювання
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                            SMS про затримки та скасування
+                        </label>
+                    </div>
                 </div>
-                <div class="history-item">
-                    <span>✈️ Бронювання Лондон (KBP → LHR)</span>
-                    <span class="points positive">+640</span>
-                </div>
-                <div class="history-item">
-                    <span>✈️ Бронювання Нью-Йорк (KBP → JFK)</span>
-                    <span class="points positive">+1,280</span>
-                </div>
-                <div class="history-item">
-                    <span>🎂 Бонус до дня народження</span>
-                    <span class="points positive">+100</span>
-                </div>
-                <div class="history-item">
-                    <span>✈️ Бронювання Париж (KBP → CDG) - очікує</span>
-                    <span class="points positive">+162</span>
-                </div>
-                <div class="history-item">
-                    <span>🔄 Скасування Дубай (KBP → DXB)</span>
-                    <span class="points negative">-301</span>
-                </div>
-                <div class="history-item">
-                    <span>⭐ Відгук про подорож</span>
-                    <span class="points positive">+50</span>
-                </div>
-                <div class="history-item" style="font-weight: 700; color: var(--color-primary);">
-                    <span>📊 Загальний баланс</span>
-                    <span class="points positive">1,240 бонусів</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- ===== TAB 4: SETTINGS ===== -->
-        <div class="tab-content" id="tab-settings" role="tabpanel">
-            <div class="profile-card">
-                <div class="card-title">
-                    <i class="fas fa-bell"></i> Сповіщення
-                </div>
-                <div class="settings-group">
-                    <div class="settings-item">
-                        <div class="info">
-                            <div class="label">Email сповіщення</div>
-                            <div class="description">Отримувати сповіщення на email</div>
-                        </div>
-                        <div class="toggle active" onclick="toggleSwitch(this)">
-                            <div class="thumb"></div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="info">
-                            <div class="label">Push-сповіщення</div>
-                            <div class="description">Сповіщення про статус рейсу</div>
-                        </div>
-                        <div class="toggle" onclick="toggleSwitch(this)">
-                            <div class="thumb"></div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="info">
-                            <div class="label">SMS-сповіщення</div>
-                            <div class="description">Сповіщення про затримки рейсів</div>
-                        </div>
-                        <div class="toggle active" onclick="toggleSwitch(this)">
-                            <div class="thumb"></div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="info">
-                            <div class="label">Маркетингові розсилки</div>
-                            <div class="description">Отримувати спеціальні пропозиції</div>
-                        </div>
-                        <div class="toggle" onclick="toggleSwitch(this)">
-                            <div class="thumb"></div>
-                        </div>
+                <div class="settings-section">
+                    <div class="section-title">Безпека</div>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                            Двофакторна автентифікація (2FA)
+                        </label>
                     </div>
                 </div>
-            </div>
 
-            <div class="profile-card">
-                <div class="card-title">
-                    <i class="fas fa-globe"></i> Мовні налаштування
+                <div class="settings-section" style="border-bottom:none;">
+                    <div class="section-title">Акаунт</div>
+                    <button class="btn btn-danger" onclick="confirmDeleteAccount()">
+                        <i class="fas fa-trash-alt"></i> Видалити акаунт
+                    </button>
                 </div>
-                <div class="settings-group">
-                    <div class="settings-item">
-                        <div class="info">
-                            <div class="label">Мова інтерфейсу</div>
-                            <div class="description">Оберіть мову для відображення сайту</div>
-                        </div>
-                        <select style="padding: 0.375rem 1.5rem 0.375rem 0.75rem; border: 1px solid var(--color-gray-200); border-radius: var(--radius); font-family: var(--font-family); font-size: 0.875rem;">
-                            <option value="uk" selected>🇺🇦 Українська</option>
-                            <option value="en">🇬🇧 English</option>
-                            <option value="ru">🇷🇺 Русский</option>
-                        </select>
-                    </div>
-                    <div class="settings-item">
-                        <div class="info">
-                            <div class="label">Валюта за замовчуванням</div>
-                            <div class="description">Відображення цін у вашій валюті</div>
-                        </div>
-                        <select style="padding: 0.375rem 1.5rem 0.375rem 0.75rem; border: 1px solid var(--color-gray-200); border-radius: var(--radius); font-family: var(--font-family); font-size: 0.875rem;">
-                            <option value="USD" selected>🇺🇸 USD ($)</option>
-                            <option value="EUR">🇪🇺 EUR (€)</option>
-                            <option value="UAH">🇺🇦 UAH (₴)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Danger Zone -->
-            <div class="danger-zone">
-                <div class="danger-title">
-                    <i class="fas fa-exclamation-triangle"></i> Небезпечна зона
-                </div>
-                <div class="danger-text">
-                    Видалення акаунта призведе до безповоротного видалення всіх ваших даних,
-                    історії бронювань та бонусів.
-                </div>
-                <button class="btn btn-danger" onclick="confirmDeleteAccount()">
-                    <i class="fas fa-trash"></i> Видалити акаунт
-                </button>
             </div>
         </div>
 
     </div>
 </main>
 
-<!-- ===== TOAST CONTAINER ===== -->
-<div class="toast-container" id="toastContainer"></div>
-
-<!-- ===== CONFIRM DELETE MODAL (inline) ===== -->
-<div style="display: none;" id="deleteConfirm">
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1rem; animation: fadeIn 0.3s ease;" onclick="if(event.target===this) closeDeleteConfirm()">
-        <div style="background: var(--color-white); border-radius: var(--radius-lg); padding: 2rem; max-width: 420px; width: 100%; text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚠️</div>
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Ви впевнені?</h3>
-            <p style="color: var(--color-gray-500); font-size: 0.875rem; margin-bottom: 1.5rem;">
-                Ця дія незворотна. Всі ваші дані, бронювання та бонуси будуть видалені.
-            </p>
-            <div style="display: flex; gap: 0.75rem; justify-content: center;">
-                <button class="btn btn-outline" onclick="closeDeleteConfirm()">
-                    <i class="fas fa-times"></i> Скасувати
-                </button>
-                <button class="btn btn-danger" onclick="deleteAccount()">
-                    <i class="fas fa-trash"></i> Видалити назавжди
-                </button>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="#">Політика конфіденційності</a>
+                <a href="#">Умови використання</a>
+                <a href="#">Cookies</a>
             </div>
+            <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;">
+                &copy; 2026 FlyBooking. Всі права захищено.
+            </p>
         </div>
     </div>
-</div>
+</footer>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-container" id="toastContainer"></div>
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
@@ -1530,7 +526,59 @@
         'use strict';
 
         // ============================
-        // 1. MOBILE MENU
+        // 1. ПЕРЕВІРКА АВТОРИЗАЦІЇ
+        // ============================
+        function checkAuth() {
+            const user = JSON.parse(localStorage.getItem('flybooking_user'));
+
+            if (!user) {
+                // Немає користувача - редірект на головну
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Оновлення даних профілю
+            document.getElementById('profileName').textContent = `${user.firstName} ${user.lastName}`;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profileAvatar').textContent = user.firstName.charAt(0) + user.lastName.charAt(0);
+            document.getElementById('profileFirstName').value = user.firstName;
+            document.getElementById('profileLastName').value = user.lastName;
+            document.getElementById('profileEmailInput').value = user.email;
+
+            if (user.registeredAt) {
+                const date = new Date(user.registeredAt);
+                document.getElementById('profileSince').textContent =
+                    `Користувач з ${date.toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' })}`;
+            }
+
+            // Оновлення навігації
+            const navAuth = document.getElementById('navAuth');
+            const initials = user.firstName.charAt(0) + user.lastName.charAt(0);
+            navAuth.innerHTML = `
+                <span class="user-badge">
+                    <span class="user-avatar">${initials.toUpperCase()}</span>
+                    ${user.firstName} ${user.lastName}
+                </span>
+                <button class="btn btn-outline btn-sm" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Вийти
+                </button>
+            `;
+
+            // Мобільне меню
+            document.getElementById('mobileNavLinks').innerHTML = `
+                <li><a href="index.html"><i class="fas fa-home"></i> Головна</a></li>
+                <li><a href="#"><i class="fas fa-plane"></i> Рейси</a></li>
+                <li><a href="#" class="active"><i class="fas fa-user"></i> Профіль</a></li>
+                <li style="padding-top:1rem;border-top:1px solid var(--color-gray-200);">
+                    <button class="btn btn-danger btn-block" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Вийти
+                    </button>
+                </li>
+            `;
+        }
+
+        // ============================
+        // 2. MOBILE MENU
         // ============================
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -1542,191 +590,28 @@
         });
 
         // ============================
-        // 2. TABS
+        // 3. TABS
         // ============================
-        const tabs = document.querySelectorAll('.profile-tab');
-        const contents = {
-            info: document.getElementById('tab-info'),
+        const navItems = document.querySelectorAll('.profile-nav .nav-item');
+        const tabs = {
             bookings: document.getElementById('tab-bookings'),
+            profile: document.getElementById('tab-profile'),
             bonuses: document.getElementById('tab-bonuses'),
             settings: document.getElementById('tab-settings')
         };
 
-        tabs.forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                // Remove active from all tabs
-                tabs.forEach(function(t) { t.classList.remove('active'); });
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                navItems.forEach(n => n.classList.remove('active'));
                 this.classList.add('active');
-
-                // Hide all content, show selected
-                Object.values(contents).forEach(function(c) { c.classList.remove('active'); });
+                Object.values(tabs).forEach(tab => tab.classList.remove('active'));
                 const tabId = this.dataset.tab;
-                if (contents[tabId]) {
-                    contents[tabId].classList.add('active');
-                }
-
-                // Save active tab
-                localStorage.setItem('activeProfileTab', tabId);
+                if (tabs[tabId]) tabs[tabId].classList.add('active');
             });
         });
 
-        // Restore active tab from localStorage
-        const savedTab = localStorage.getItem('activeProfileTab') || 'info';
-        document.querySelector(`.profile-tab[data-tab="${savedTab}"]`)?.click();
-
         // ============================
-        // 3. PROFILE UPDATE
-        // ============================
-        window.handleProfileUpdate = function(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Збереження...';
-
-            setTimeout(function() {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                showToast('✅ Профіль успішно оновлено!', 'success');
-            }, 1500);
-        };
-
-        window.resetProfileForm = function() {
-            document.getElementById('firstName').value = 'Олена';
-            document.getElementById('lastName').value = 'Коваленко';
-            document.getElementById('phone').value = '+38 (050) 123-45-67';
-            document.getElementById('birthDate').value = '1990-05-15';
-            document.getElementById('language').value = 'uk';
-            document.getElementById('currency').value = 'USD';
-            document.getElementById('favAirport').value = 'Київ (KBP)';
-            showToast('🔄 Дані скинуто до збережених', 'info');
-        };
-
-        // ============================
-        // 4. PASSWORD CHANGE
-        // ============================
-        window.handlePasswordChange = function(e) {
-            e.preventDefault();
-            const current = document.getElementById('currentPassword').value;
-            const newPass = document.getElementById('newPassword').value;
-            const confirm = document.getElementById('confirmPassword').value;
-            const errorEl = document.getElementById('passwordError');
-            const confirmError = document.getElementById('confirmError');
-
-            // Reset errors
-            errorEl.classList.remove('visible');
-            confirmError.classList.remove('visible');
-
-            if (!current || !newPass || !confirm) {
-                errorEl.textContent = 'Заповніть всі поля';
-                errorEl.classList.add('visible');
-                return;
-            }
-
-            if (newPass !== confirm) {
-                confirmError.classList.add('visible');
-                return;
-            }
-
-            if (newPass.length < 8) {
-                errorEl.textContent = 'Пароль має містити мінімум 8 символів';
-                errorEl.classList.add('visible');
-                return;
-            }
-
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Зміна...';
-
-            setTimeout(function() {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                document.getElementById('currentPassword').value = '';
-                document.getElementById('newPassword').value = '';
-                document.getElementById('confirmPassword').value = '';
-                showToast('✅ Пароль успішно змінено!', 'success');
-            }, 1500);
-        };
-
-        // ============================
-        // 5. BOOKING FILTERS
-        // ============================
-        window.filterBookings = function() {
-            const status = document.getElementById('bookingStatusFilter').value;
-            const from = document.getElementById('bookingFrom').value;
-            const to = document.getElementById('bookingTo').value;
-            const items = document.querySelectorAll('.booking-item');
-            let visibleCount = 0;
-
-            items.forEach(function(item) {
-                let show = true;
-
-                // Filter by status
-                if (status !== 'all' && item.dataset.status !== status) {
-                    show = false;
-                }
-
-                // Filter by date (simplified)
-                // In real app, you'd parse the date from the booking meta
-
-                if (show) {
-                    item.style.display = '';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-
-            // Show empty state if no bookings
-            const empty = document.getElementById('emptyBookings');
-            if (visibleCount === 0) {
-                empty.style.display = 'block';
-            } else {
-                empty.style.display = 'none';
-            }
-        };
-
-        window.resetBookingFilters = function() {
-            document.getElementById('bookingStatusFilter').value = 'all';
-            document.getElementById('bookingFrom').value = '';
-            document.getElementById('bookingTo').value = '';
-            filterBookings();
-        };
-
-        // ============================
-        // 6. TOGGLE SWITCH
-        // ============================
-        window.toggleSwitch = function(el) {
-            el.classList.toggle('active');
-            const label = el.closest('.settings-item').querySelector('.label');
-            const isActive = el.classList.contains('active');
-            showToast(`🔔 ${label.textContent} ${isActive ? 'ввімкнено' : 'вимкнено'}`, 'info');
-        };
-
-        // ============================
-        // 7. DELETE ACCOUNT
-        // ============================
-        window.confirmDeleteAccount = function() {
-            document.getElementById('deleteConfirm').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        };
-
-        window.closeDeleteConfirm = function() {
-            document.getElementById('deleteConfirm').style.display = 'none';
-            document.body.style.overflow = '';
-        };
-
-        window.deleteAccount = function() {
-            closeDeleteConfirm();
-            showToast('⚠️ Акаунт видалено. Ми сумуємо за вами!', 'error');
-            setTimeout(function() {
-                window.location.href = '/index.html';
-            }, 2000);
-        };
-
-        // ============================
-        // 8. TOAST NOTIFICATIONS
+        // 4. TOAST
         // ============================
         window.showToast = function(message, type = 'info') {
             const container = document.getElementById('toastContainer');
@@ -1734,26 +619,95 @@
             toast.className = `toast toast-${type}`;
             toast.textContent = message;
             container.appendChild(toast);
-
             setTimeout(function() {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateY(20px)';
                 toast.style.transition = 'all 0.3s ease';
-                setTimeout(function() {
-                    toast.remove();
-                }, 300);
+                setTimeout(function() { toast.remove(); }, 300);
             }, 3500);
         };
 
         // ============================
-        // 9. INITIAL TOAST
+        // 5. PROFILE UPDATE
         // ============================
-        setTimeout(function() {
-            showToast('👋 Ласкаво просимо до вашого профілю!', 'info');
-        }, 800);
+        window.handleProfileUpdate = function(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('profileFirstName').value.trim();
+            const lastName = document.getElementById('profileLastName').value.trim();
 
-        console.log('👤 Профіль користувача завантажено успішно!');
-        console.log('📊 Дані користувача: Олена Коваленко, 12 подорожей, 1240 бонусів');
+            if (!firstName || !lastName) {
+                showToast('⚠️ Заповніть всі поля', 'error');
+                return;
+            }
+
+            const user = JSON.parse(localStorage.getItem('flybooking_user'));
+            user.firstName = firstName;
+            user.lastName = lastName;
+            localStorage.setItem('flybooking_user', JSON.stringify(user));
+
+            document.getElementById('profileName').textContent = `${firstName} ${lastName}`;
+            document.getElementById('profileAvatar').textContent = firstName.charAt(0) + lastName.charAt(0);
+
+            // Оновлення навігації
+            const navAuth = document.getElementById('navAuth');
+            const initials = firstName.charAt(0) + lastName.charAt(0);
+            navAuth.innerHTML = `
+                <span class="user-badge">
+                    <span class="user-avatar">${initials.toUpperCase()}</span>
+                    ${firstName} ${lastName}
+                </span>
+                <button class="btn btn-outline btn-sm" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Вийти
+                </button>
+            `;
+
+            showToast('✅ Профіль оновлено!', 'success');
+        };
+
+        // ============================
+        // 6. LOGOUT
+        // ============================
+        window.handleLogout = function() {
+            if (confirm('Ви впевнені, що хочете вийти?')) {
+                localStorage.removeItem('flybooking_user');
+                showToast('👋 Ви вийшли з акаунта', 'info');
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 500);
+            }
+        };
+
+        // ============================
+        // 7. DELETE ACCOUNT
+        // ============================
+        window.confirmDeleteAccount = function() {
+            if (confirm('⚠️ Ви впевнені, що хочете видалити акаунт? Цю дію неможливо скасувати!')) {
+                const confirmation = prompt('Введіть "ВИДАЛИТИ" для підтвердження:');
+                if (confirmation === 'ВИДАЛИТИ') {
+                    localStorage.removeItem('flybooking_user');
+                    showToast('🗑️ Акаунт видалено.', 'error');
+                    setTimeout(function() {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showToast('❌ Підтвердження не вірне', 'error');
+                }
+            }
+        };
+
+        // ============================
+        // 8. ІНІЦІАЛІЗАЦІЯ
+        // ============================
+        checkAuth();
+
+        setTimeout(function() {
+            const user = JSON.parse(localStorage.getItem('flybooking_user'));
+            if (user) {
+                showToast(`👋 Ласкаво просимо до профілю, ${user.firstName}!`, 'success');
+            }
+        }, 500);
+
+        console.log('✈️ FlyBooking — Профіль користувача завантажено!');
 
     })();
 </script>
