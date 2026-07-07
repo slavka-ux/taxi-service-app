@@ -1,0 +1,351 @@
+/* ============================================
+   СТИЛІ АВТОРИЗАЦІЇ - Flight Booking Service
+   Сторінки: Login, Register, Forgot Password
+   ============================================ */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-gray-50);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Анімований фоновий градієнт */
+.auth-page::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.04) 0%, transparent 40%);
+    animation: authBgAnimation 20s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes authBgAnimation {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.05); }
+    100% { transform: rotate(-5deg) scale(0.95); }
+}
+
+/* Основний контейнер форми */
+.auth-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2xl);
+    padding: 2.5rem 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Бренд/Логотип */
+.auth-brand {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-brand .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-gray-900);
+    text-decoration: none;
+}
+
+.auth-brand .logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--color-primary-gradient);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+    font-size: 1.25rem;
+}
+
+.auth-brand .subtitle {
+    color: var(--color-gray-500);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Заголовки форми */
+.auth-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.auth-description {
+    text-align: center;
+    color: var(--color-gray-500);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Соціальні кнопки */
+.auth-social {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-social .btn-social {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem;
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    color: var(--color-gray-700);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-height: 44px;
+}
+
+.auth-social .btn-social:hover {
+    border-color: var(--color-primary);
+    background: var(--color-gray-50);
+    transform: translateY(-1px);
+}
+
+.auth-social .btn-social img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Розділювач */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    color: var(--color-gray-400);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-gray-200);
+}
+
+/* Поля форми */
+.auth-form .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.auth-form .form-input {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    background: var(--color-gray-50);
+    border-color: var(--color-gray-200);
+}
+
+.auth-form .form-input:focus {
+    background: var(--color-white);
+}
+
+/* Password visibility toggle */
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle .toggle-btn {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-gray-400);
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    transition: color var(--transition-fast);
+}
+
+.password-toggle .toggle-btn:hover {
+    color: var(--color-gray-600);
+}
+
+/* Додаткові опції */
+.auth-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-options .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-gray-600);
+    cursor: pointer;
+}
+
+.auth-options .remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.auth-options .forgot-link {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.auth-options .forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Кнопка входу */
+.auth-submit {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Посилання на перехід */
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-gray-200);
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+}
+
+.auth-footer a {
+    font-weight: 600;
+}
+
+/* ----- Специфічні стилі для реєстрації ----- */
+.auth-register .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Password strength indicator */
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.password-strength .strength-bar {
+    display: flex;
+    gap: 0.25rem;
+    height: 4px;
+}
+
+.password-strength .strength-bar span {
+    flex: 1;
+    background: var(--color-gray-200);
+    border-radius: var(--radius-full);
+    transition: background var(--transition-fast);
+}
+
+.password-strength .strength-bar span.active.weak { background: var(--color-danger); }
+.password-strength .strength-bar span.active.medium { background: var(--color-warning); }
+.password-strength .strength-bar span.active.strong { background: var(--color-success); }
+
+.password-strength .strength-text {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    margin-top: 0.25rem;
+}
+
+/* ----- Адаптивність ----- */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1.5rem 1rem;
+        border-radius: var(--radius);
+    }
+
+    .auth-brand .logo {
+        font-size: 1.5rem;
+    }
+
+    .auth-register .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .auth-social {
+        flex-direction: column;
+    }
+
+    .auth-options {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+}
+
+/* Анімація появи помилок */
+.auth-error {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+/* Успішне повідомлення */
+.auth-success {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auth-success::before {
+    content: '✓';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--color-success);
+    color: var(--color-white);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
