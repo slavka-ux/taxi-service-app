@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль — SkyTicket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/logo.svg">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="SkyTicket">
+                <span>SkyTicket</span>
+            </a>
+            <nav class="nav">
+                <a href="search.html" class="nav-link">Пошук</a>
+                <a href="profile.html" class="nav-link active">Профіль</a>
+                <a href="loyalty.html" class="nav-link">Бонуси</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="logoutBtn">Вийти</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-sidebar">
+                <div class="profile-avatar">
+                    <img src="assets/images/avatar-placeholder.png" alt="Аватар">
+                    <h3 id="profileName">Іван Петров</h3>
+                    <p id="profileEmail">ivan@example.com</p>
+                </div>
+                <nav class="profile-nav">
+                    <a href="#" class="active" data-tab="info">Особисті дані</a>
+                    <a href="#" data-tab="passengers">Пасажири</a>
+                    <a href="#" data-tab="history">Історія замовлень</a>
+                    <a href="#" data-tab="loyalty">Бонуси</a>
+                    <a href="#" data-tab="settings">Налаштування</a>
+                </nav>
+            </div>
+
+            <div class="profile-content">
+                <!-- Вкладка: Особисті дані -->
+                <div class="tab-content active" id="tab-info">
+                    <h2>Особисті дані</h2>
+                    <form id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Ім'я</label>
+                                <input type="text" id="firstName" value="Іван">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Прізвище</label>
+                                <input type="text" id="lastName" value="Петров">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="ivan@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" value="+380 67 123 45 67">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                    </form>
+                </div>
+
+                <!-- Вкладка: Збережені пасажири -->
+                <div class="tab-content" id="tab-passengers">
+                    <h2>Збережені пасажири</h2>
+                    <div class="passengers-list" id="passengersList">
+                        <!-- Заповнюється через JS -->
+                    </div>
+                    <button class="btn btn-secondary" id="addPassengerBtn">+ Додати пасажира</button>
+                </div>
+
+                <!-- Вкладка: Історія замовлень -->
+                <div class="tab-content" id="tab-history">
+                    <h2>Історія замовлень</h2>
+                    <div class="booking-history" id="bookingHistory">
+                        <!-- Заповнюється через JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SkyTicket. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
