@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Бронювання авіаквитків онлайн — найкращі ціни на авіаперельоти по всьому світу">
+    <meta name="theme-color" content="#2563eb">
+    
+    <title>FlyBooking — Пошук та бронювання авіаквитків</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/booking.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header" role="banner">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="Головна навігація">
+                <!-- Логотип -->
+                <a href="/" class="logo" aria-label="FlyBooking - Головна">
+                    <span class="logo-icon">✈️</span>
+                    <span class="logo-text">Fly<span>Booking</span></span>
+                </a>
+
+                <!-- Пошук у навігації (десктоп) -->
+                <div class="nav-search hide-mobile">
+                    <form action="/search" method="GET" class="nav-search-form">
+                        <input 
+                            type="text" 
+                            name="q" 
+                            placeholder="Куди летимо?" 
+                            aria-label="Пошук напрямків"
+                            class="nav-search-input"
+                        >
+                        <button type="submit" aria-label="Пошук">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Навігаційні посилання -->
+                <ul class="nav-links" role="menubar">
+                    <li role="none">
+                        <a href="/flights" role="menuitem">
+                            <i class="fas fa-plane"></i> Рейси
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="/my-bookings" role="menuitem">
+                            <i class="fas fa-ticket-alt"></i> Мої квитки
+                        </a>
+                    </li>
+                    <li role="none" class="nav-auth">
+                        <a href="/login" class="btn btn-outline btn-sm" role="menuitem">
+                            <i class="fas fa-sign-in-alt"></i> Увійти
+                        </a>
+                        <a href="/register" class="btn btn-primary btn-sm" role="menuitem">
+                            <i class="fas fa-user-plus"></i> Реєстрація
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Mobile menu toggle -->
+                <button 
+                    class="mobile-toggle" 
+                    aria-label="Відкрити меню"
+                    aria-expanded="false"
+                    id="mobileToggle"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Мобільне меню">
+            <div class="container">
+                <form action="/search" method="GET" class="mobile-search">
+                    <input 
+                        type="text" 
+                        name="q" 
+                        placeholder="Куди летимо?" 
+                        aria-label="Пошук напрямків"
+                    >
+                    <button type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <ul>
+                    <li><a href="/flights"><i class="fas fa-plane"></i> Рейси</a></li>
+                    <li><a href="/my-bookings"><i class="fas fa-ticket-alt"></i> Мої квитки</a></li>
+                    <li><a href="/login"><i class="fas fa-sign-in-alt"></i> Увійти</a></li>
+                    <li><a href="/register" class="btn btn-primary btn-block">Реєстрація</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero" aria-label="Пошук авіаквитків">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Знайдіть найкращі<br>
+                        <span class="gradient-text">авіаквитки</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Порівнюйте ціни від сотень авіакомпаній та бронюйте<br>
+                        квитки за найвигіднішими тарифами
+                    </p>
+
+                    <!-- ===== SEARCH FORM ===== -->
+                    <div class="search-wrapper">
+                        <form action="/search" method="GET" class="search-form" id="searchForm" role="search">
+                            <!-- Тип подорожі -->
+                            <div class="trip-type">
+                                <label class="trip-option active">
+                                    <input type="radio" name="tripType" value="oneway" checked>
+                                    <span>В одну сторону</span>
+                                </label>
+                                <label class="trip-option">
+                                    <input type="radio" name="tripType" value="roundtrip">
+                                    <span>Туди й назад</span>
+                                </label>
+                                <label class="trip-option">
+                                    <input type="radio" name="tripType" value="multi">
+                                    <span>Мультимісто</span>
+                                </label>
+                            </div>
+
+                            <!-- Основний рядок пошуку -->
+                            <div class="search-grid">
+                                <!-- Звідки -->
+                                <div class="form-group">
+                                    <label for="origin" class="form-label">
+                                        <i class="fas fa-circle-dot"></i> Звідки
+                                    </label>
+                                    <div class="search-input-wrapper">
+                                        <input 
+                                            type="text" 
+                                            id="origin" 
+                                            name="origin" 
+                                            class="form-input" 
+                                            placeholder="Місто або аеропорт"
+                                            value="Київ (KBP)"
+                                            autocomplete="off"
+                                            required
+                                        >
+                                        <button type="button" class="input-clear" aria-label="Очистити">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="autocomplete-list" id="originSuggestions"></div>
+                                </div>
+
+                                <!-- Куди -->
+                                <div class="form-group">
+                                    <label for="destination" class="form-label">
+                                        <i class="fas fa-location-dot"></i> Куди
+                                    </label>
+                                    <div class="search-input-wrapper">
+                                        <input 
+                                            type="text" 
+                                            id="destination" 
+                                            name="destination" 
+                                            class="form-input" 
+                                            placeholder="Місто або аеропорт"
+                                            value="Лондон (LHR)"
+                                            autocomplete="off"
+                                            required
+                                        >
+                                        <button type="button" class="input-clear" aria-label="Очистити">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="autocomplete-list" id="destinationSuggestions"></div>
+                                </div>
+
+                                <!-- Обмін напрямків -->
+                                <button type="button" class="swap-btn" aria-label="Обміняти напрямки" id="swapBtn">
+                                    <i class="fas fa-arrow-right-arrow-left"></i>
+                                </button>
+                            </div>
+
+                            <!-- Друга лінія: дати та пасажири -->
+                            <div class="search-grid search-grid-2">
+                                <!-- Дата вильоту -->
+                                <div class="form-group">
+                                    <label for="departureDate" class="form-label">
+                                        <i class="fas fa-calendar-day"></i> Дата вильоту
+                                    </label>
+                                    <input 
+                                        type="date" 
+                                        id="departureDate" 
+                                        name="departureDate" 
+                                        class="form-input"
+                                        value="2026-08-15"
+                                        min="2026-07-07"
+                                        required
+                                    >
+                                </div>
+
+                                <!-- Дата повернення (прихована за замовчуванням) -->
+                                <div class="form-group return-date-group" id="returnDateGroup">
+                                    <label for="returnDate" class="form-label">
+                                        <i class="fas fa-calendar-day"></i> Дата повернення
+                                    </label>
+                                    <input 
+                                        type="date" 
+                                        id="returnDate" 
+                                        name="returnDate" 
+                                        class="form-input"
+                                        value="2026-08-22"
+                                        min="2026-07-07"
+                                    >
+                                </div>
+
+                                <!-- Пасажири -->
+                                <div class="form-group passengers-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-users"></i> Пасажири
+                                    </label>
+                                    <button 
+                                        type="button" 
+                                        class="form-input passenger-selector" 
+                                        id="passengerToggle"
+                                        aria-expanded="false"
+                                    >
+                                        <span id="passengerSummary">1 дорослий</span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    
+                                    <!-- Dropdown пасажирів -->
+                                    <div class="passenger-dropdown" id="passengerDropdown">
+                                        <div class="passenger-option">
+                                            <div>
+                                                <div class="label">Дорослі</div>
+                                                <div class="hint">12+ років</div>
+                                            </div>
+                                            <div class="counter">
+                                                <button type="button" class="counter-btn" data-type="adults" data-action="decrease">−</button>
+                                                <span class="counter-value" id="adultsCount">1</span>
+                                                <button type="button" class="counter-btn" data-type="adults" data-action="increase">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="passenger-option">
+                                            <div>
+                                                <div class="label">Діти</div>
+                                                <div class="hint">2-11 років</div>
+                                            </div>
+                                            <div class="counter">
+                                                <button type="button" class="counter-btn" data-type="children" data-action="decrease">−</button>
+                                                <span class="counter-value" id="childrenCount">0</span>
+                                                <button type="button" class="counter-btn" data-type="children" data-action="increase">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="passenger-option">
+                                            <div>
+                                                <div class="label">Немовлята</div>
+                                                <div class="hint">0-2 років</div>
+                                            </div>
+                                            <div class="counter">
+                                                <button type="button" class="counter-btn" data-type="infants" data-action="decrease">−</button>
+                                                <span class="counter-value" id="infantsCount">0</span>
+                                                <button type="button" class="counter-btn" data-type="infants" data-action="increase">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="passenger-actions">
+                                            <button type="button" class="btn btn-primary btn-block" id="passengerDone">Готово</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Приховані поля для пасажирів -->
+                                    <input type="hidden" name="adults" id="adultsInput" value="1">
+                                    <input type="hidden" name="children" id="childrenInput" value="0">
+                                    <input type="hidden" name="infants" id="infantsInput" value="0">
+                                </div>
+
+                                <!-- Клас обслуговування -->
+                                <div class="form-group">
+                                    <label for="cabinClass" class="form-label">
+                                        <i class="fas fa-crown"></i> Клас
+                                    </label>
+                                    <select id="cabinClass" name="cabinClass" class="form-select">
+                                        <option value="economy">Економ</option>
+                                        <option value="premium_economy">Преміум економ</option>
+                                        <option value="business">Бізнес</option>
+                                        <option value="first">Перший</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Кнопка пошуку -->
+                            <div class="search-actions">
+                                <button type="submit" class="btn btn-primary btn-lg btn-search">
+                                    <i class="fas fa-search"></i> Пошук квитків
+                                </button>
+                            </div>
+
+                            <!-- Додаткові опції -->
+                            <div class="search-options">
+                                <label class="option-check">
+                                    <input type="checkbox" name="directFlights" value="true">
+                                    <span>Тільки прямі рейси</span>
+                                </label>
+                                <label class="option-check">
+                                    <input type="checkbox" name="flexibleDates" value="true">
+                                    <span>Гнучкі дати (± 3 дні)</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Популярні напрямки -->
+                    <div class="popular-destinations">
+                        <span class="popular-label">Популярні напрямки:</span>
+                        <div class="popular-tags">
+                            <a href="/search?destination=LHR" class="popular-tag">🇬🇧 Лондон</a>
+                            <a href="/search?destination=CDG" class="popular-tag">🇫🇷 Париж</a>
+                            <a href="/search?destination=FRA" class="popular-tag">🇩🇪 Франкфурт</a>
+                            <a href="/search?destination=JFK" class="popular-tag">🇺🇸 Нью-Йорк</a>
+                            <a href="/search?destination=DXB" class="popular-tag">🇦🇪 Дубай</a>
+                            <a href="/search?destination=BKK" class="popular-tag">🇹🇭 Бангкок</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FEATURES SECTION ===== -->
+        <section class="features" aria-label="Переваги сервісу">
+            <div class="container">
+                <h2 class="section-title text-center">
+                    Чому обирають <span class="gradient-text">FlyBooking</span>
+                </h2>
+                <p class="section-subtitle text-center">
+                    Ми робимо подорожі доступними та комфортними для кожного
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3>Найкращі ціни</h3>
+                        <p>Порівнюємо ціни від сотень авіакомпаній та туроператорів</p>
+                        <span class="feature-badge">економія до 40%</span>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Безпечна оплата</h3>
+                        <p>Захищені транзакції через Stripe з 3D Secure</p>
+                        <span class="feature-badge">🔒 PCI DSS</span>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Підтримка 24/7</h3>
+                        <p>Наша команда завжди готова допомогти з будь-яким питанням</p>
+                        <span class="feature-badge">🇺🇦 українською</span>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rotate-left"></i>
+                        </div>
+                        <h3>Гнучке скасування</h3>
+                        <p>Скасовуйте бронювання з поверненням коштів за тарифом</p>
+                        <span class="feature-badge">100% повернення</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SPECIAL OFFERS ===== -->
+        <section class="offers" aria-label="Спеціальні пропозиції">
+            <div class="container">
+                <div class="offers-header">
+                    <div>
+                        <h2 class="section-title">Спеціальні <span class="gradient-text">пропозиції</span></h2>
+                        <p class="section-subtitle">Найкращі ціни на популярні напрямки</p>
+                    </div>
+                    <a href="/flights" class="btn btn-outline">
+                        Всі пропозиції <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="offers-grid" id="offersGrid">
+                    <!-- Offer Card 1 -->
+                    <div class="offer-card">
+                        <div class="offer-image" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'%3E%3Crect width=\'400\' height=\'200\' fill=\'%232563eb\'/%3E%3Ctext x=\'50\' y=\'130\' font-size=\'48\'%3E🏰%3C/text%3E%3C/svg%3E')">
+                            <span class="offer-discount">-35%</span>
+                        </div>
+                        <div class="offer-body">
+                            <div class="offer-route">
+                                <span class="offer-origin">Київ (KBP)</span>
+                                <span class="offer-arrow">✈</span>
+                                <span class="offer-destination">Париж (CDG)</span>
+                            </div>
+                            <div class="offer-price">
+                                <span class="price-old">€250</span>
+                                <span class="price-new">€162</span>
+                            </div>
+                            <div class="offer-meta">
+                                <span><i class="fas fa-calendar"></i> 15-22 серпня</span>
+                                <span><i class="fas fa-plane"></i> Ryanair</span>
+                            </div>
+                            <a href="/search?destination=CDG" class="btn btn-primary btn-block btn-sm">Забронювати</a>
+                        </div>
+                    </div>
+
+                    <!-- Offer Card 2 -->
+                    <div class="offer-card">
+                        <div class="offer-image" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'%3E%3Crect width=\'400\' height=\'200\' fill=\'%23f59e0b\'/%3E%3Ctext x=\'50\' y=\'130\' font-size=\'48\'%3E🗽%3C/text%3E%3C/svg%3E')">
+                            <span class="offer-discount">-28%</span>
+                        </div>
+                        <div class="offer-body">
+                            <div class="offer-route">
+                                <span class="offer-origin">Київ (KBP)</span>
+                                <span class="offer-arrow">✈</span>
+                                <span class="offer-destination">Нью-Йорк (JFK)</span>
+                            </div>
+                            <div class="offer-price">
+                                <span class="price-old">$890</span>
+                                <span class="price-new">$640</span>
+                            </div>
+                            <div class="offer-meta">
+                                <span><i class="fas fa-calendar"></i> 1-15 вересня</span>
+                                <span><i class="fas fa-plane"></i> Turkish Airlines</span>
+                            </div>
+                            <a href="/search?destination=JFK" class="btn btn-primary btn-block btn-sm">Забронювати</a>
+                        </div>
+                    </div>
+
+                    <!-- Offer Card 3 -->
+                    <div class="offer-card">
+                        <div class="offer-image" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'%3E%3Crect width=\'400\' height=\'200\' fill=\'%2310b981\'/%3E%3Ctext x=\'50\' y=\'130\' font-size=\'48\'%3E🏝️%3C/text%3E%3C/svg%3E')">
+                            <span class="offer-discount">-42%</span>
+                        </div>
+                        <div class="offer-body">
+                            <div class="offer-route">
+                                <span class="offer-origin">Київ (KBP)</span>
+                                <span class="offer-arrow">✈</span>
+                                <span class="offer-destination">Дубай (DXB)</span>
+                            </div>
+                            <div class="offer-price">
+                                <span class="price-old">$520</span>
+                                <span class="price-new">$301</span>
+                            </div>
+                            <div class="offer-meta">
+                                <span><i class="fas fa-calendar"></i> 10-20 жовтня</span>
+                                <span><i class="fas fa-plane"></i> FlyDubai</span>
+                            </div>
+                            <a href="/search?destination=DXB" class="btn btn-primary btn-block btn-sm">Забронювати</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="how-it-works" aria-label="Як це працює">
+            <div class="container">
+                <h2 class="section-title text-center">
+                    Як це <span class="gradient-text">працює</span>
+                </h2>
+                <p class="section-subtitle text-center">
+                    Всього 3 кроки до вашої подорожі мрії
+                </p>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">🔍</div>
+                        <h3>Пошук</h3>
+                        <p>Введіть місто вильоту, прибуття та дати подорожі</p>
+                    </div>
+
+                    <div class="step-arrow">→</div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">✏️</div>
+                        <h3>Бронювання</h3>
+                        <p>Оберіть найкращий рейс, вкажіть дані пасажирів</p>
+                    </div>
+
+                    <div class="step-arrow">→</div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">💳</div>
+                        <h3>Оплата</h3>
+                        <p>Сплатіть квиток безпечно та отримайте PNR-код</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIALS ===== -->
+        <section class="testimonials" aria-label="Відгуки клієнтів">
+            <div class="container">
+                <h2 class="section-title text-center">
+                    Що кажуть наші <span class="gradient-text">клієнти</span>
+                </h2>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">
+                            "Користуюся FlyBooking вже рік. Найкращі ціни, швидке бронювання.
+                            Дуже зручно, що можна обрати місце на карті салону."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">О</div>
+                            <div>
+                                <div class="author-name">Олена Коваленко</div>
+                                <div class="author-info">Київ → Париж, 5 подорожей</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">
+                            "Чудовий сервіс! Підтримка допомогла змінити дату вильоту
+                            за 2 години до рейсу. Всі питання вирішуються миттєво."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">М</div>
+                            <div>
+                                <div class="author-name">Михайло Петренко</div>
+                                <div class="author-info">Львів → Нью-Йорк, 3 подорожі</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">
+                            "Перший раз бронював авіаквитки онлайн. Все просто і зрозуміло.
+                            Квитки прийшли на email за 5 хвилин. Рекомендую!"
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">А</div>
+                            <div>
+                                <div class="author-name">Андрій Шевченко</div>
+                                <div class="author-info">Харків → Дубай, 1 подорож</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA SECTION ===== -->
+        <section class="cta-section" aria-label="Запрошення до дії">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Готові до <span>подорожі</span>?</h2>
+                    <p>Забронюйте квиток вже сьогодні та отримайте <strong>10% знижку</strong> на першу подорож</p>
+                    <div class="cta-buttons">
+                        <a href="/search" class="btn btn-primary btn-lg">
+                            <i class="fas fa-search"></i> Почати пошук
+                        </a>
+                        <a href="/register" class="btn btn-outline btn-lg">
+                            <i class="fas fa-user-plus"></i> Зареєструватися
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo & Description -->
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <span class="logo-icon">✈️</span>
+                        <span class="logo-text">Fly<span>Booking</span></span>
+                    </a>
+                    <p class="footer-description">
+                        Найкращий сервіс для пошуку та бронювання авіаквитків по всьому світу.
+                        Подорожуйте з комфортом та економте до 40%.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h4>Сервіси</h4>
+                    <ul>
+                        <li><a href="/flights">Пошук рейсів</a></li>
+                        <li><a href="/my-bookings">Мої бронювання</a></li>
+                        <li><a href="/check-in">Онлайн-реєстрація</a></li>
+                        <li><a href="/offers">Спецпропозиції</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Підтримка</h4>
+                    <ul>
+                        <li><a href="/help">Довідка</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/contact">Контакти</a></li>
+                        <li><a href="/refund">Повернення коштів</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Контакти</h4>
+                    <ul class="footer-contacts">
+                        <li><i class="fas fa-phone"></i> +38 (044) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> support@flybooking.com</li>
+                        <li><i class="fas fa-clock"></i> Пн-Нд: 24/7</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Київ, Україна</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <a href="/privacy">Політика конфіденційності</a>
+                    <a href="/terms">Умови використання</a>
+                    <a href="/cookies">Cookies</a>
+                </div>
+                <p class="footer-copy">
+                    &copy; 2026 FlyBooking. Всі права захищено.
+                    <span class="footer-payment">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- MOBILE MENU TOGGLE -----
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            let isMenuOpen = false;
+
+            mobileToggle.addEventListener('click', function() {
+                isMenuOpen = !isMenuOpen;
+                mobileToggle.setAttribute('aria-expanded', isMenuOpen);
+                mobileMenu.classList.toggle('open');
+                document.body.classList.toggle('menu-open');
+            });
+
+            // Закриття меню при кліку поза ним
+            document.addEventListener('click', function(e) {
+                if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                    isMenuOpen = false;
+                    mobileToggle.setAttribute('aria-expanded', false);
+                    mobileMenu.classList.remove('open');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+
+            // ----- TRIP TYPE TOGGLE -----
+            const tripOptions = document.querySelectorAll('.trip-option input[type="radio"]');
+            const returnDateGroup = document.getElementById('returnDateGroup');
+
+            tripOptions.forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    // Оновлення активного стану
+                    document.querySelectorAll('.trip-option').forEach(function(el) {
+                        el.classList.remove('active');
+                    });
+                    this.closest('.trip-option').classList.add('active');
+
+                    // Показати/приховати дату повернення
+                    if (this.value === 'roundtrip') {
+                        returnDateGroup.style.display = 'block';
+                    } else {
+                        returnDateGroup.style.display = 'none';
+                    }
+                });
+            });
+
+            // ----- PASSENGER DROPDOWN -----
+            const passengerToggle = document.getElementById('passengerToggle');
+            const passengerDropdown = document.getElementById('passengerDropdown');
+            const adultsInput = document.getElementById('adultsInput');
+            const childrenInput = document.getElementById('childrenInput');
+            const infantsInput = document.getElementById('infantsInput');
+            const adultsDisplay = document.getElementById('adultsCount');
+            const childrenDisplay = document.getElementById('childrenCount');
+            const infantsDisplay = document.getElementById('infantsCount');
+            const passengerSummary = document.getElementById('passengerSummary');
+
+            let adults = 1;
+            let children = 0;
+            let infants = 0;
+            let isPassengerOpen = false;
+
+            // Відкриття/закриття dropdown
+            passengerToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                isPassengerOpen = !isPassengerOpen;
+                passengerDropdown.classList.toggle('open');
+                passengerToggle.setAttribute('aria-expanded', isPassengerOpen);
+            });
+
+            // Закриття при кліку поза
+            document.addEventListener('click', function(e) {
+                if (isPassengerOpen && !passengerDropdown.contains(e.target) && !passengerToggle.contains(e.target)) {
+                    isPassengerOpen = false;
+                    passengerDropdown.classList.remove('open');
+                    passengerToggle.setAttribute('aria-expanded', false);
+                }
+            });
+
+            // Обробка кнопок +/-
+            document.querySelectorAll('.counter-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const action = this.dataset.action;
+                    let current;
+
+                    switch(type) {
+                        case 'adults': current = adults; break;
+                        case 'children': current = children; break;
+                        case 'infants': current = infants; break;
+                        default: return;
+                    }
+
+                    if (action === 'increase') {
+                        if (type === 'adults' && current >= 9) return;
+                        if (type === 'children' && current >= 8) return;
+                        if (type === 'infants' && current >= 8) return;
+                        current++;
+                    } else {
+                        if (current <= 0) return;
+                        if (type === 'adults' && current <= 1) return;
+                        current--;
+                    }
+
+                    // Оновлення значень
+                    switch(type) {
+                        case 'adults': 
+                            adults = current; 
+                            adultsDisplay.textContent = adults;
+                            adultsInput.value = adults;
+                            break;
+                        case 'children': 
+                            children = current; 
+                            childrenDisplay.textContent = children;
+                            childrenInput.value = children;
+                            break;
+                        case 'infants': 
+                            infants = current; 
+                            infantsDisplay.textContent = infants;
+                            infantsInput.value = infants;
+                            break;
+                    }
+
+                    updatePassengerSummary();
+                });
+            });
+
+            // Кнопка "Готово"
+            document.getElementById('passengerDone').addEventListener('click', function() {
+                isPassengerOpen = false;
+                passengerDropdown.classList.remove('open');
+                passengerToggle.setAttribute('aria-expanded', false);
+            });
+
+            // Оновлення тексту підсумку
+            function updatePassengerSummary() {
+                const parts = [];
+                if (adults > 0) parts.push(`${adults} доросл${adults === 1 ? 'ий' : 'их'}`);
+                if (children > 0) parts.push(`${children} діт${children === 1 ? 'я' : 'ей'}`);
+                if (infants > 0) parts.push(`${infants} немовл${infants === 1 ? 'я' : 'ят'}`);
+                passengerSummary.textContent = parts.join(', ');
+            }
+
+            // ----- SWAP BUTTON (обмін напрямків) -----
+            document.getElementById('swapBtn').addEventListener('click', function() {
+                const origin = document.getElementById('origin');
+                const destination = document.getElementById('destination');
+                const temp = origin.value;
+                origin.value = destination.value;
+                destination.value = temp;
+            });
+
+            // ----- CLEAR INPUT BUTTONS -----
+            document.querySelectorAll('.input-clear').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const input = this.closest('.search-input-wrapper').querySelector('input');
+                    input.value = '';
+                    input.focus();
+                });
+            });
+
+            // ----- FORM SUBMISSION (з додатковою логікою) -----
+            const searchForm = document.getElementById('searchForm');
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Збір даних форми
+                const formData = new FormData(this);
+                const params = new URLSearchParams();
+
+                for (const [key, value] of formData.entries()) {
+                    if (value && value !== '') {
+                        params.append(key, value);
+                    }
+                }
+
+                // Додавання пасажирів
+                params.set('adults', adults);
+                params.set('children', children);
+                params.set('infants', infants);
+
+                // Редирект на сторінку результатів
+                window.location.href = `/search?${params.toString()}`;
+            });
+
+            // ----- SET DEFAULT DATE (сьогодні + 7 днів) -----
+            (function setDefaultDates() {
+                const today = new Date();
+                const departure = new Date(today);
+                departure.setDate(today.getDate() + 7);
+                
+                const returnDate = new Date(today);
+                returnDate.setDate(today.getDate() + 14);
+
+                const departureInput = document.getElementById('departureDate');
+                const returnInput = document.getElementById('returnDate');
+
+                // Форматування дати: YYYY-MM-DD
+                const formatDate = (date) => {
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                };
+
+                if (!departureInput.value) {
+                    departureInput.value = formatDate(departure);
+                    departureInput.min = formatDate(today);
+                }
+
+                if (!returnInput.value) {
+                    returnInput.value = formatDate(returnDate);
+                }
+            })();
+
+            // ----- AUTOSUGGEST (демо автозаповнення) -----
+            const airports = [
+                { code: 'KBP', city: 'Київ', country: 'Україна' },
+                { code: 'LHR', city: 'Лондон', country: 'Великобританія' },
+                { code: 'CDG', city: 'Париж', country: 'Франція' },
+                { code: 'FRA', city: 'Франкфурт', country: 'Німеччина' },
+                { code: 'JFK', city: 'Нью-Йорк', country: 'США' },
+                { code: 'DXB', city: 'Дубай', country: 'ОАЕ' },
+                { code: 'BKK', city: 'Бангкок', country: 'Таїланд' },
+                { code: 'SIN', city: 'Сінгапур', country: 'Сінгапур' },
+                { code: 'HND', city: 'Токіо', country: 'Японія' },
+                { code: 'SYD', city: 'Сідней', country: 'Австралія' },
+                { code: 'LAX', city: 'Лос-Анджелес', country: 'США' },
+                { code: 'MIA', city: 'Маямі', country: 'США' },
+                { code: 'IST', city: 'Стамбул', country: 'Туреччина' },
+                { code: 'AMS', city: 'Амстердам', country: 'Нідерланди' },
+                { code: 'BCN', city: 'Барселона', country: 'Іспанія' }
+            ];
+
+            function setupAutocomplete(inputId, suggestionsId) {
+                const input = document.getElementById(inputId);
+                const suggestions = document.getElementById(suggestionsId);
+
+                input.addEventListener('input', function() {
+                    const query = this.value.toLowerCase().trim();
+                    if (query.length < 2) {
+                        suggestions.classList.remove('visible');
+                        return;
+                    }
+
+                    const matches = airports.filter(function(airport) {
+                        const searchStr = `${airport.city} ${airport.code} ${airport.country}`.toLowerCase();
+                        return searchStr.includes(query);
+                    });
+
+                    if (matches.length === 0) {
+                        suggestions.classList.remove('visible');
+                        return;
+                    }
+
+                    suggestions.innerHTML = '';
+                    matches.slice(0, 8).forEach(function(airport) {
+                        const item = document.createElement('div');
+                        item.className = 'autocomplete-item';
+                        item.innerHTML = `
+                            <span class="city">${airport.city}</span>
+                            <span class="code">${airport.code}</span>
+                            <span class="country">${airport.country}</span>
+                        `;
+                        item.addEventListener('click', function() {
+                            input.value = `${airport.city} (${airport.code})`;
+                            suggestions.classList.remove('visible');
+                        });
+                        suggestions.appendChild(item);
+                    });
+
+                    suggestions.classList.add('visible');
+                });
+
+                // Закриття підказок при кліку поза
+                document.addEventListener('click', function(e) {
+                    if (!suggestions.contains(e.target) && e.target !== input) {
+                        suggestions.classList.remove('visible');
+                    }
+                });
+            }
+
+            setupAutocomplete('origin', 'originSuggestions');
+            setupAutocomplete('destination', 'destinationSuggestions');
+
+            // ----- SMOOTH SCROLL -----
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // ----- COUNTER ANIMATION (для статистики) -----
+            function animateCounters() {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            // Додаткові анімації можна додати тут
+                            console.log('Counter section visible');
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                const counters = document.querySelectorAll('.counter-value');
+                counters.forEach(function(counter) {
+                    observer.observe(counter);
+                });
+            }
+
+            // ----- LAZY LOAD для зображень (якщо будуть) -----
+            if ('loading' in HTMLImageElement.prototype) {
+                document.querySelectorAll('img[data-src]').forEach(function(img) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                });
+            }
+
+            console.log('✈️ FlyBooking — головна сторінка завантажена успішно!');
+            console.log('📅 Сьогодні:', new Date().toLocaleDateString('uk-UA'));
+
+        })();
+    </script>
+
+    <!-- Додатковий JavaScript для автозаповнення (доопрацювання стилів) -->
+    <style>
+        /* Додаткові стилі для автозаповнення (не змінюються в основних CSS) */
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-top: none;
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .autocomplete-list.visible {
+            display: block;
+        }
+
+        .autocomplete-item {
+            padding: 0.625rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background var(--transition-fast);
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .autocomplete-item:hover {
+            background: var(--color-gray-50);
+        }
+
+        .autocomplete-item .city {
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .autocomplete-item .code {
+            font-family: var(--font-mono);
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: var(--radius-sm);
+        }
+
+        .autocomplete-item .country {
+            color: var(--color-gray-500);
+            font-size: 0.75rem;
+        }
+
+        /* Стилі для мобільного меню */
+        .mobile-menu {
+            display: none;
+            background: var(--color-white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-lg);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .mobile-menu.open {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu ul li {
+            padding: 0.5rem 0;
+        }
+
+        .mobile-menu ul li a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0;
+            color: var(--color-gray-700);
+            font-weight: 500;
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--color-primary);
+        }
+
+        .mobile-menu .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .mobile-search {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-search input {
+            flex: 1;
+            padding: 0.625rem 1rem;
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+        }
+
+        .mobile-search button {
+            padding: 0.625rem 1.25rem;
+            background: var(--color-primary-gradient);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-toggle {
+                display: none;
+            }
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+
+            .mobile-toggle span {
+                display: block;
+                width: 25px;
+                height: 2.5px;
+                background: var(--color-gray-700);
+                transition: all var(--transition-fast);
+                border-radius: 2px;
+            }
+
+            .mobile-toggle[aria-expanded="true"] span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .mobile-toggle[aria-expanded="true"] span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-toggle[aria-expanded="true"] span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .nav-links .nav-auth {
+                display: none;
+            }
+        }
+
+        /* Додаткові стилі для hero */
+        .hero .search-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .search-grid-2 {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        @media (max-width: 992px) {
+            .search-grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .search-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Стилі для кастомного вибору класу */
+        .form-select {
+            appearance: auto;
+            cursor: pointer;
+        }
+
+        /* Додаткові стилі для зірок відгуків */
+        .testimonial-stars {
+            color: #f59e0b;
+            font-size: 1.125rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Стилі для footer payment іконок */
+        .footer-payment {
+            display: inline-flex;
+            gap: 0.75rem;
+            margin-left: 1rem;
+            font-size: 1.25rem;
+            color: var(--color-gray-400);
+        }
+
+        .footer-payment i {
+            transition: color var(--transition-fast);
+        }
+
+        .footer-payment i:hover {
+            color: var(--color-gray-600);
+        }
+
+        @media (max-width: 640px) {
+            .footer-payment {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+</html>
