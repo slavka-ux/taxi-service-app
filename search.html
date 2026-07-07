@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результати пошуку — SkyTicket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/logo.svg">
+</head>
+<body>
+    <!-- Шапка (така сама, як на index.html) -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.svg" alt="SkyTicket">
+                <span>SkyTicket</span>
+            </a>
+            <nav class="nav">
+                <a href="search.html" class="nav-link active">Пошук</a>
+                <a href="profile.html" class="nav-link">Профіль</a>
+                <a href="loyalty.html" class="nav-link">Бонуси</a>
+                <a href="#" class="nav-link" id="notifications">🔔</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Увійти</button>
+                <button class="btn btn-primary">Реєстрація</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Секція пошуку (з параметрами) -->
+    <section class="search-section">
+        <div class="container">
+            <form id="searchForm" class="search-form-mini">
+                <input type="text" id="fromMini" placeholder="Звідки" value="Київ">
+                <input type="text" id="toMini" placeholder="Куди" value="Лондон">
+                <input type="date" id="departureMini">
+                <button type="submit" class="btn btn-search">Пошук</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Результати пошуку -->
+    <section class="results-section">
+        <div class="container">
+            <div class="results-header">
+                <h2>Знайдено рейсів: <span id="resultsCount">0</span></h2>
+                <div class="filters-sort">
+                    <div class="filter-group">
+                        <button class="btn btn-filter" id="filterToggle">Фільтри</button>
+                    </div>
+                    <div class="sort-group">
+                        <label for="sort">Сортувати за:</label>
+                        <select id="sort">
+                            <option value="price-asc">Ціною (зростання)</option>
+                            <option value="price-desc">Ціною (спадання)</option>
+                            <option value="time-asc">Часом вильоту</option>
+                            <option value="time-desc">Часом прильоту</option>
+                            <option value="duration">Тривалістю</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель фільтрів -->
+            <div class="filters-panel" id="filtersPanel">
+                <div class="filter-section">
+                    <h4>Авіакомпанії</h4>
+                    <label><input type="checkbox" value="delta"> Delta</label>
+                    <label><input type="checkbox" value="emirates"> Emirates</label>
+                    <label><input type="checkbox" value="lufthansa"> Lufthansa</label>
+                    <label><input type="checkbox" value="uia"> Ukraine International</label>
+                </div>
+                <div class="filter-section">
+                    <h4>Пересадки</h4>
+                    <label><input type="radio" name="stops" value="all" checked> Всі</label>
+                    <label><input type="radio" name="stops" value="0"> Прямі</label>
+                    <label><input type="radio" name="stops" value="1"> 1 пересадка</label>
+                    <label><input type="radio" name="stops" value="2"> 2+ пересадки</label>
+                </div>
+                <div class="filter-section">
+                    <h4>Ціна</h4>
+                    <div class="price-range">
+                        <input type="range" id="priceRange" min="0" max="5000" value="3000">
+                        <span>до <span id="priceValue">3000</span> $</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Список рейсів -->
+            <div class="flights-list" id="flightsList">
+                <!-- Заповнюється через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SkyTicket. Всі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
